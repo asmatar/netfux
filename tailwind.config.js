@@ -9,8 +9,10 @@ module.exports = {
     extend: {
       fontFamily: {
         netflix: ['var(--netflix)'],
+        NetflixBold: ['NetflixBold'],
       },
       screens: {
+        'big-phone': '500px',
         'small-tab': '600px',
         'tablette-md' : '800px'
       },

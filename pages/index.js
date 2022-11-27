@@ -8,22 +8,8 @@ import { useSelector } from 'react-redux';
 import { getNetflixOriginalsFilm, getTrendingFilm, getTopRatedFilm, getHistoryFilm, getScienceFictionFilm, getActionFilm, getDocumentariesFilm, getAnimationFilm, getAdventureFilm, getRomanceFilm, getComedyFilm, getHorrorFilm, getFantasyFilm, getCrimeFilm, getDramaFilm, getFamilyFilm } from '../redux/filmReducer';
 
 export default function Home() {
-  const netflixOriginals = useSelector((state) => state.films.netflixOriginals)
-  const trending = useSelector((state) => state.films.trending)
-  const topRated = useSelector((state) => state.films.topRated)
-  const history = useSelector((state) => state.films.history)
-  const scienceFiction = useSelector((state) => state.films.scienceFiction)
-  const action = useSelector((state) => state.films.action)
-  const documentaries = useSelector((state) => state.films.documentaries)
-  const animation = useSelector((state) => state.films.animation)
-  const adventure = useSelector((state) => state.films.adventure)
-  const romance = useSelector((state) => state.films.romance)
-  const comedy = useSelector((state) => state.films.comedy)
-  const horror = useSelector((state) => state.films.horror)
-  const crime = useSelector((state) => state.films.crime)
-  const drama = useSelector((state) => state.films.drama)
-  const fantasy = useSelector((state) => state.films.fantasy)
-  const family = useSelector((state) => state.films.family)
+
+  const { netflixOriginals, trending, topRated, history, scienceFiction, action, documentaries, animation, adventure, romance, comedy, horror, crime, drama, fantasy, family } = useSelector((state) => state.films)
 
 
   return (
@@ -35,7 +21,7 @@ export default function Home() {
       </Head>
       <main>
         <Banner />
-        <section className="flex flex-col gap-y-8 pl-12">
+        <section className="flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12">
           <Row CategoryTitle={"Netflix Originals"} filmsCategory={netflixOriginals}/>
           <Row CategoryTitle={"Top Rated"} filmsCategory={topRated}/>
           <Row CategoryTitle={"Trending"} filmsCategory={trending}/>
