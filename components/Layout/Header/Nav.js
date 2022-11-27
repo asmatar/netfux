@@ -18,10 +18,10 @@ const router = useRouter()
             </svg>
         </div>
 
-        <ul className="gap-x-6 flex-col sm:relative sm:top-0 absolute top-16 right-1/2 group-hover:opacity-100 opacity-0 group-hover:visible translate-x-1/2 sm:flex-row w-56 sm:flex sm:border-none sm:opacity-100 border border-t-2 border-gray-500 border-t-white transition-all duration-200">
-            <li className="hover:text-gray-400 transition-all duration-200 ease cursor-pointer py-3 w-full flex justify-center"><Link className={router.pathname == "/" ? "text-red-500 font-NetflixBold" : ""}href="/">Home</Link></li>
-            <li className="hover:text-gray-400 transition-all duration-200 ease cursor-pointer py-3 w-full flex justify-center"><Link className={router.pathname == "/series" ? "text-red-500 font-NetflixBold" : ""}href="/series">Series</Link></li>
-            <li className="hover:text-gray-400 transition-all duration-200 ease cursor-pointer py-3 w-full flex justify-center"><Link className={router.pathname == "/my-list" ? "text-red-500 font-NetflixBold" : ""}href="/my-list">My List</Link></li>
+        <ul className="gap-x-6 flex-col sm:relative sm:top-0 absolute top-16 right-1/2  group-hover:opacity-100 opacity-0 group-hover:visible translate-x-1/2 sm:flex-row w-56 sm:flex sm:border-none sm:opacity-100 border border-t-2 border-gray-500 border-t-white transition-all duration-200">
+            <li className="hover:text-gray-400 hover:bg-[#141414] transition-all duration-200 ease bg-black/70 cursor-pointer py-3 w-full flex justify-center"><Link className={router.pathname == "/" ? "text-red-500 font-NetflixBold" : ""}href="/">Home</Link></li>
+            <li className="hover:text-gray-400 hover:bg-[#141414] transition-all duration-200 ease bg-black/70 cursor-pointer py-3 w-full flex justify-center"><Link className={router.pathname == "/series" ? "text-red-500 font-NetflixBold" : ""}href="/series">Series</Link></li>
+            <li className="hover:text-gray-400 hover:bg-[#141414] transition-all duration-200 ease bg-black/70 cursor-pointer py-3 w-full flex justify-center"><Link className={router.pathname == "/my-list" ? "text-red-500 font-NetflixBold" : ""}href="/my-list">My List</Link></li>
         </ul>
     </nav>
   )

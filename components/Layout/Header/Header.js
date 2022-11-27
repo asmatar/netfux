@@ -63,7 +63,7 @@ function Header() {
                   <path d="M17.5 14.5833L23.3334 20.4167H11.6667L17.5 14.5833Z" fill="white" />
                 </svg>
               </div>
-              <button type="button" className="bg-[#141414] border border-gray-500/30 py-4 flex justify-center transition-all duration-300 hover:bg-black/70 w-full ">
+              <button type="button" className="bg-black/70 border border-gray-500/30 py-4 flex justify-center transition-all duration-300 hover:bg-[#141414] w-full ">
                 <span>sign out of Netflix</span>
               </button>
             </div>
