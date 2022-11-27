@@ -6,7 +6,21 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        netflix: ['var(--netflix)'],
+      },
+      screens: {
+        'small-tab': '600px',
+        'tablette-md' : '800px'
+      },
+      colors: {
+        'net-gray': '#696969',
+      },
+    },
+  },
+  variants: {
+    fill: ['hover', 'focus']
   },
   plugins: [
     require('tailwind-scrollbar-hide'),
