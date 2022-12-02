@@ -1,12 +1,13 @@
 import '../styles/globals.css';
 import localFont from '@next/font/local';
-//import {storeWrapper} from "../redux/store"
 import { Provider } from 'react-redux';
 import Layout from '../components/Layout/layout';
 import {wrapper} from "../redux/store";
 
 const netflixFont = localFont({ src: '../public/font/NetflixSans-Light.otf' });
+
 function MyApp({ Component, ...rest }) {
+
   const { store, props } = wrapper.useWrappedStore(rest);
 
   return (

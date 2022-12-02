@@ -35,27 +35,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 
+a changer
 
-
-
-export const BASE_URL = 'https://api.themoviedb.org/3/';
-export const API_KEY = process.env.NEXT_PUBLIC_API_KEY
-
-export const request = {
-    fetchTrendingMovies : `${BASE_URL}trending/all/week?api_key=${API_KEY}&language=en-US`,
-    fetchNetflixOriginals: `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_networks=213`,
-    fetchTopRated: `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=en-US`,
-    fetchActionMovies: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=28`,
-    fetchComedyMovies: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=35`,
-    fetchHorrorMovies: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=27`,
-    fetchRomanceMovies: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=10749`,
-    fetchDocumentaries: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=99`,
-    fetchAdventure: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=12`,
-    fetchAnimation: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=16`,
-    fetchCrime: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=80`,
-    fetchDrama: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=18`,
-    fetchFamilu: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=10751`,
-    fetchFantasy: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=14`,
-    fetchHistory: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=36`,
-    fetchScienceFiction: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=878`,
-}
+- header search button => pas centrer + verifier responsive comportement
+- row => faire carousel scroll avec btn
+- tenter de faire le petit slider sur le carousel - - - -
+- cardFilm => on hover info film
+- cardFilm => modal on click + info
+- click sur film va sur detail
+- play => lance le trailer
+- search a implementer
+- search by genre
+- hover card use transition

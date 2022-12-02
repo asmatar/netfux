@@ -13,11 +13,16 @@ module.exports = {
       },
       screens: {
         'big-phone': '500px',
+        'login': '550px',
         'small-tab': '600px',
         'tablette-md' : '800px'
       },
       colors: {
         'net-gray': '#696969',
+      },
+      backgroundImage: {
+        'gradient':'linear-gradient(to bottom,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%,rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 44%,#141414 68%,#141414 100%);',
+        login: "url(/images/login/netflixbg1.jpg)",
       },
     },
   },

@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 const Footer = () => {
+  
   return (
     <footer>
       <div className="flex flex-col gap-y-4 max-w-screen-lg w-full py-4">
