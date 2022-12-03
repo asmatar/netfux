@@ -18,9 +18,7 @@ function Row({ filmsCategory, CategoryTitle, handleModal}) {
 
   return (
     <div className="space-y-0.5 md:space-y-1 group relative">
-      <h2 className="w-56 cursor-pointer text-xs tablette-md:text-[1.4vw] font-semibold text-[#e5e5e5] transition duration-200 hover:text-white">
-       {CategoryTitle}
-      </h2>
+      {CategoryTitle}
       <div className="group relative md:-ml-2">
       <div className="absolute top-0 bottom-0 right-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100" onClick={() => handleCarousel("right")}>
         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
