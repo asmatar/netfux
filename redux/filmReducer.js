@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
-const initialState = { 
+const initialState = {
   netflixOriginals: [],
   trending: [],
   topRated: [],
@@ -18,6 +18,7 @@ const initialState = {
   drama: [],
   fantasy: [],
   family: [],
+  allFilms : [], 
 };
 const filmsSlice = createSlice({
   name: 'films',
@@ -69,6 +70,7 @@ const filmsSlice = createSlice({
       state.topRated = action.payload
     },
     getTrendingFilm (state, action) {
+      console.log("ij")
       state.trending = action.payload
     },
   },

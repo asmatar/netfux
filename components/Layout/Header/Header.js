@@ -5,11 +5,12 @@ import Link from 'next/link';
 import Nav from './Nav';
 import Button from '../../UI/Button';
 import { useRouter } from 'next/router';
-
+import { useDispatch } from 'react-redux';
+import {searchByName} from "../../../redux/filmReducer"
 function Header() {
   const {pathname} = useRouter()
   const [isScroll, setIsScroll] = useState(false);
-
+  const dispatch = useDispatch()
   const handleScroll = () => {
     if (window.scrollY > 0) {
       setIsScroll(true);
@@ -17,6 +18,10 @@ function Header() {
       setIsScroll(false);
     }
   };
+  const handleSearchName = (event) => {
+    console.log("first", event.target.value)
+    dispatch(searchByName(event.target.value))
+  }
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -47,7 +52,7 @@ function Header() {
         :
           <div className="relative flex items-center gap-x-6">
             <div className="relative hidden small-tab:flex">
-              <input type="search" placeholder="Title..." className="peer relative z-10 h-10 w-10 cursor-pointer rounded-full border bg-transparent pl-10 outline-none transition-all duration-200 ease-in focus:w-full focus:cursor-text focus:border-red-600 focus:pl-16 focus:pr-4" />
+              <input type="search" placeholder="Title..." className="peer relative z-10 h-10 w-10 cursor-pointer rounded-full border bg-transparent pl-10 outline-none transition-all duration-200 ease-in focus:w-full focus:cursor-text focus:border-red-600 focus:pl-16 focus:pr-4" onChange={(event) => handleSearchName(event)} />
               <svg xmlns="http://www.w3.org/2000/svg" className="absolute inset-y-0 my-auto h-8 w-12 border-r border-transparent stroke-gray-500 px-3.5 peer-focus:border-red-600 peer-focus:stroke-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>

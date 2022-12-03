@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 
 const Layout = (props) => {
   const {pathname} = useRouter()
-  console.log(pathname)
   return (
     <>
     <Head>

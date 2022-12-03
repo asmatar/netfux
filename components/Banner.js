@@ -1,23 +1,33 @@
 /* eslint-disable jsx-a11y/alt-text */
 import {useEffect, useState} from 'react';
 import Image from "next/image"
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import baseUrl from '../constant/movie'
 import Button from './UI/Button';
+import { useRouter } from 'next/router';
 
 function Banner() {
-
+  const dispatch = useDispatch()
+  const {pathname} = useRouter()
   const netflixOriginals = useSelector((state) => state.films.netflixOriginals)
   const [movie, setMovie] = useState(null)
-  const [fadedescriptionFilm, setFadedescriptionFilm ] = useState(false)
   useEffect(() => {
     setMovie(netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)])
   }, [netflixOriginals])
   
-
   const handleClickModal = () => { }
 
   return <div className="flex flex-col justify-end space-y-2 mt-8 md:space-y-4 h-[45vw] pb-[4vw] lg:pb-[8vw] pl-4 big-phone:pl-6 lg:pl-12">
+      <div className="flex items-center gap-x-2 self-start">
+        <Image
+         src="/N.png"
+         width={15}
+         height={15}
+         alt="banner image movie"
+        />
+        <p className="uppercase text-gray-400 text-xs sm:text-ba">{pathname !== "/" ? pathname : "Film"}</p>
+        <div className="">Genres</div>
+        <div className="cursor-pointer" onClick={(event)=>handleFilter(event)}>crime</div>
       <div className="absolute top-0 left-0 -z-10  w-screen h-[56.25vw] !bg-gradient" >
         <Image
           layout="fill"
@@ -25,6 +35,7 @@ function Banner() {
           objectFit="cover"
           alt="banner image movie"
         />
+      </div>
       </div>
         <h1 className="text-lg big-phone:2xl font-bold sm:text-2xl md:text-4xl lg:text-6xl">
           {movie?.title || movie?.name || movie?.original_name}

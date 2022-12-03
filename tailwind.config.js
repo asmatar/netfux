@@ -24,6 +24,15 @@ module.exports = {
         'gradient':'linear-gradient(to bottom,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%,rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 44%,#141414 68%,#141414 100%);',
         login: "url(/images/login/netflixbg1.jpg)",
       },
+      keyframes: {
+        fade: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        fade: 'fade .2s ease-out',
+      },
     },
   },
   variants: {
