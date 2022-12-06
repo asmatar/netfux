@@ -18,7 +18,6 @@ const initialState = {
   drama: [],
   fantasy: [],
   family: [],
-  allFilms : [], 
 };
 const filmsSlice = createSlice({
   name: 'films',

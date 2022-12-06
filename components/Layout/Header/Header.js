@@ -60,7 +60,7 @@ function Header() {
             <div className="relative flex items-center gap-x-2 cursor-pointer group">
               <Image
                 src="/avatar.jpg"
-                objectFit="cover"
+                //objectFit="cover"
                 width={35}
                 height={35}
                 alt="profil logo"

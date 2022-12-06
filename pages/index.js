@@ -13,16 +13,16 @@ const Modal = dynamic(() => import('../components/Modal'), {
   ssr: false,
 })
 export default function Home() {
-  const [showModal, setShowModal] = useState(false)
-  const [currentFilmId, setCurrentFilm] = useState(null)
+/*   const [showModal, setShowModal] = useState(false)
+  const [currentFilmId, setCurrentFilm] = useState(null) */
 
-  const handleModal = (currentFilmId) => {
+  /* const handleModal = (currentFilmId) => {
   setCurrentFilm(currentFilmId)
    console.log("first", showModal, currentFilmId)
    setShowModal(true)
- } 
+ }  */
   const { netflixOriginals, trending, topRated, history, scienceFiction, action, documentaries, animation, adventure, romance, comedy, horror, crime, drama, fantasy, family } = useSelector((state) => state.films)
-
+  const {show} = useSelector(state => state.modal)
   return (
     <div>
       <Head>
@@ -33,25 +33,25 @@ export default function Home() {
       <main>
         <Banner />
         <section className="flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12">
-          <Row CategoryTitle={"Netflix Originals"} filmsCategory={netflixOriginals} handleModal={handleModal}/>
-          <Row CategoryTitle={"Top Rated"} filmsCategory={topRated} handleModal={handleModal}/>
-          <Row CategoryTitle={"Trending"} filmsCategory={trending} handleModal={handleModal}/>
-          <Row CategoryTitle={"History"} filmsCategory={history} handleModal={handleModal}/>
-          <Row CategoryTitle={"ScienceFiction"} filmsCategory={scienceFiction} handleModal={handleModal}/>
-          <Row CategoryTitle={"Action"} filmsCategory={action} handleModal={handleModal}/>
-          <Row CategoryTitle={"Documentaries"} filmsCategory={documentaries} handleModal={handleModal}/>
-          <Row CategoryTitle={"Animation"} filmsCategory={animation} handleModal={handleModal}/>
-          <Row CategoryTitle={"Adventure"} filmsCategory={adventure} handleModal={handleModal}/>
-          <Row CategoryTitle={"Romance"} filmsCategory={romance} handleModal={handleModal}/>
-          <Row CategoryTitle={"Comedy"} filmsCategory={comedy} handleModal={handleModal}/>
-          <Row CategoryTitle={"Horror"} filmsCategory={horror} handleModal={handleModal}/>
-          <Row CategoryTitle={"Crime"} filmsCategory={crime} handleModal={handleModal}/>
-          <Row CategoryTitle={"Drama"} filmsCategory={drama} handleModal={handleModal}/>
-          <Row CategoryTitle={"Fantasy"} filmsCategory={fantasy} handleModal={handleModal}/>
-          <Row CategoryTitle={"Family"} filmsCategory={family} handleModal={handleModal}/>
+          <Row CategoryTitle={"Netflix Originals"} filmsCategory={netflixOriginals} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Top Rated"} filmsCategory={topRated} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Trending"} filmsCategory={trending} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"History"} filmsCategory={history} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"ScienceFiction"} filmsCategory={scienceFiction} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Action"} filmsCategory={action} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Documentaries"} filmsCategory={documentaries} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Animation"} filmsCategory={animation} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Adventure"} filmsCategory={adventure} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Romance"} filmsCategory={romance} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Comedy"} filmsCategory={comedy} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Horror"} filmsCategory={horror} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Crime"} filmsCategory={crime} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Drama"} filmsCategory={drama} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Fantasy"} filmsCategory={fantasy} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Family"} filmsCategory={family} /* handleModal={handleModal} *//>
         </section>
       </main>
-      { showModal && <Modal setShowModal={setShowModal} currentFilmId={currentFilmId}/>}
+      { show && <Modal /* setShowModal={setShowModal} currentFilmId={currentFilmId} *//>}
     </div>
   );
 }

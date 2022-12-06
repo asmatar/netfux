@@ -1,11 +1,11 @@
 import FilmCard from './FilmCard';
 import {useRef} from "react"
-function Row({ filmsCategory, CategoryTitle, handleModal}) {
-
+function Row({ filmsCategory, CategoryTitle/* , handleModal */}) {
+  console.log("render row component")
   const rowRef = useRef(null)
 
   const displayFilmCategory = filmsCategory.map((film)=>(
-    <FilmCard key={film.id} film={film} handleModal={handleModal}/>
+    <FilmCard key={film.id} film={film} /* handleModal={handleModal} *//>
   ))  
 
   const handleCarousel = (direction) => {
@@ -17,7 +17,7 @@ function Row({ filmsCategory, CategoryTitle, handleModal}) {
   }  
 
   return (
-    <div className="space-y-0.5 md:space-y-1 group relative">
+    <div className="space-y-0.5 md:space-y-1 group relative" onMouseOver={ console.log("yead") }>
       {CategoryTitle}
       <div className="group relative md:-ml-2">
       <div className="absolute top-0 bottom-0 right-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100" onClick={() => handleCarousel("right")}>

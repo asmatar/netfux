@@ -2,19 +2,23 @@ import React, {useState, useEffect} from 'react'
 import ReactDOM from 'react-dom'
 import ReactPlayer from 'react-player/lazy'
 import Button from './UI/Button'
-
-const Modal = ({setShowModal, currentFilmId}) => {
-
+import { useSelector, useDispatch } from 'react-redux'
+import { modalClose } from '../redux/modalReducer'
+const Modal = () => {
+  const currentFilmId = useSelector(state => state.modal.id)
   const [genres, setGenres] = useState([])
   const [trailer, setTrailer] = useState('')
   const [movie, setMovie] = useState([])
   const [muted, setMuted] = useState(false)
-
+  const dispatch = useDispatch()
+  const handleCloseModal = () => {
+    dispatch(modalClose())
+  }
   useEffect(() => {
     const fetchFilmDetail = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/movie/${currentFilmId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&append_to_response=videos`)
       const data = await response.json()
-      console.log(data)
+
       setMovie(data)
       if (data?.videos) {
         const index = data.videos.results.findIndex(
@@ -32,18 +36,18 @@ const Modal = ({setShowModal, currentFilmId}) => {
       console.log("error")
     }
   }, [currentFilmId])
-  const handleMute = () => {
+    const handleMute = () => {
     setMuted((prev) => !prev)
   }
-  console.log(muted)
+
   
   return ReactDOM.createPortal((
     <>
       <div class="modal animate-fade fixed top-0 left-0 right-0 bottom-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto bg-black/60 z-50 flex items-center justify-center" /* onClick={() => setShowModal(false)} */>
         <div className="min-w-full w-full big-phone:min-w-[85%] big-phone:w-[85%] lg:w-[850px] lg:min-w-[850px] mt-28 big-phone:mt-0">
           <div className="flex justify-center items-center min-w-full w-full lg:min-w-[850px] lg:w-[850px] big-phone:h-[380px] lg:h-[480px] h-[250px] rounded-t-lg overflow-hidden relative">
-            <div className="rounded-full bg-black p-2 w-min absolute top-5 right-5" onClick={() => {setShowModal(false); setMovie(null)}}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="Hawkins-Icon Hawkins-Icon-Standard" data-uia="previewModal-closebtn" role="button" aria-label="close" tabindex="0"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z" fill="currentColor"></path></svg>
+            <div className="rounded-full bg-black p-2 w-min absolute top-5 right-5 cursor-pointer" onClick={/* () => {setShowModal(false); setMovie(null)} */handleCloseModal}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="Hawkins-Icon Hawkins-Icon-Standard"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z" fill="currentColor"></path></svg>
             </div>
             <div className="absolute bottom-5 sm:bottom-10 left-10 z-20 flex gap-x-2 items-center">
               <Button className="bannerButton bg-white text-black">
