@@ -1,29 +1,31 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Image from 'next/image'
 import baseUrl from '../../constant/movie'
 import { useDispatch } from 'react-redux'
-import { modalOpen } from '../../redux/modalReducer'
+import { modalOpen, modalClose } from '../../redux/modalReducer'
 import dynamic from 'next/dynamic'
 import { useSelector } from 'react-redux';
 import Casting from '../../components/Casting'
 import Similar from '../../components/Similar'
 import Reviews from '../../components/Reviews'
-
+import { useRouter } from 'next/router'
 const Modal = dynamic(() => import('../../components/Modal'), {
   ssr: false,
 })
 const Detail = ({reviewsData, castData, similarData, detailData}) => {
   const dispatch = useDispatch()
   const path = `https://image.tmdb.org/t/p/original${detailData?.backdrop_path || detailData?.poster_path}`
-  console.log(detailData)
   const handleModal = (id) => {
-    console.log("first")
     dispatch(modalOpen(id))
-  }
+  } 
   const {show} = useSelector(state => state.modal)
-
+  const router = useRouter()
+  useEffect(() => {
+      dispatch(modalClose(router.query.id))
+  }, [dispatch, router.query.id])
+  console.log(reviewsData)
   return (
-    <section className="bg-cover flex w-full bg-center"
+    <section className="bg-cover flex w-full bg-center px-4"
     style={{backgroundImage:`linear-gradient(to bottom, rgba(0,0,0, .8) 0%, rgba(0,0,0, .8) 100%) , url(${path})`}}>
       {/* detail */}
       <div className="max-w-7xl flex flex-col gap-y-28 mx-auto">
@@ -75,7 +77,7 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
         < Casting cast={castData} />
         
         {/* review */}
-        < Reviews reviews={reviewsData} /> 
+        {reviewsData.length !== 0 && < Reviews reviews={reviewsData} />} 
 
         
         {/* similar */}
@@ -92,11 +94,6 @@ export default Detail
 
 export async function getServerSideProps(context) {
   let {id} = context.query
-/*   console.log(id)
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=c08ed3943d3afdc4be08c4b190d1fc02&language=en-US`)
-  const data = await res.json()
-  console.log("data",data) */
-
 
   const [fetchReviews, fetchCast, fetchSimilar, fetchDetail] = await Promise.all([
     fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=c08ed3943d3afdc4be08c4b190d1fc02&language=en-US`), 
@@ -107,14 +104,6 @@ export async function getServerSideProps(context) {
 
   const [reviews, cast, similar, detail] = await Promise.all([fetchReviews.json(), fetchCast.json(), fetchSimilar.json(), fetchDetail.json()])
   const [reviewsData, castData, similarData, detailData] = [reviews.results, cast.cast, similar.results, detail]
-/*   console.log("---------------------------------------------------------")
-  console.log(reviews)
-  console.log("---------------------------------------------------------")
-  console.log(cast)
-  console.log("---------------------------------------------------------")
-  console.log(similar) */
-
-
 
   return {
     props: {reviewsData, castData, similarData, detailData}, // will be passed to the page component as props

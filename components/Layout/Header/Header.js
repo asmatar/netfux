@@ -19,7 +19,6 @@ function Header() {
     }
   };
   const handleSearchName = (event) => {
-    console.log("first", event.target.value)
     dispatch(searchByName(event.target.value))
   }
 

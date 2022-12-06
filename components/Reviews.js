@@ -2,9 +2,8 @@ import React from 'react'
 import Review from './Review'
 
 const Reviews = ({reviews}) => {
-    console.log("review",reviews)
+
     const filterByAvatar = reviews.filter(review => !!review.author_details.avatar_path && !review.author_details.avatar_path.includes("https"))
-      console.log("filter",filterByAvatar)
 
     const displayReview = filterByAvatar.slice(0,4).map(review => (
       <Review

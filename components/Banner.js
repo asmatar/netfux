@@ -16,7 +16,6 @@ function Banner() {
 
   const handleModal = (id) => { 
     console.log("id est : ",id)
-    console.log("handle dispatchhh")
     dispatch(modalOpen(id))
   }
 

@@ -69,7 +69,6 @@ const filmsSlice = createSlice({
       state.topRated = action.payload
     },
     getTrendingFilm (state, action) {
-      console.log("ij")
       state.trending = action.payload
     },
   },

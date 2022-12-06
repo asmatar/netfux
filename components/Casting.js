@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import CastCard from './CastCard'
-const Casting = ({cast}) => {
-    console.log(cast)
+const  Casting = ({cast}) => {
+
     const displayCard = cast.slice(0,5).map(actor=> (
             <CastCard
                 key={actor.id}

@@ -5,12 +5,11 @@ import Image from 'next/image'
 import { modalOpen } from '../redux/modalReducer'
 import { useDispatch } from 'react-redux'
 const FilmCard = ({film/* , handleModal */}) => {
-  console.log("render film card")
+
 
   const dispatch = useDispatch()
   const handleModal = (id) => { 
     console.log("id est : ",id)
-    console.log("handle dispatchhh")
     dispatch(modalOpen(id))
   }
   
