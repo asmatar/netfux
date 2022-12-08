@@ -1,5 +1,6 @@
 import FilmCard from './FilmCard';
 import {useRef} from "react"
+
 function Row({ filmsCategory, CategoryTitle/* , handleModal */}) {
 
   const rowRef = useRef(null)

@@ -23,6 +23,8 @@ export default function Home() {
  }  */
   const { netflixOriginals, trending, topRated, history, scienceFiction, action, documentaries, animation, adventure, romance, comedy, horror, crime, drama, fantasy, family } = useSelector((state) => state.films)
   const {show} = useSelector(state => state.modal)
+  const {favorite} = useSelector(state => state.favorite)
+  console.log(favorite)
   return (
     <div>
       <Head>
@@ -34,6 +36,7 @@ export default function Home() {
         <Banner />
         <section className="flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12">
           <Row CategoryTitle={"Netflix Originals"} filmsCategory={netflixOriginals} /* handleModal={handleModal} *//>
+          { favorite.length >0  && <Row CategoryTitle={"My list"} filmsCategory={favorite} /* handleModal={handleModal} *//>}
           <Row CategoryTitle={"Top Rated"} filmsCategory={topRated} /* handleModal={handleModal} *//>
           <Row CategoryTitle={"Trending"} filmsCategory={trending} /* handleModal={handleModal} *//>
           <Row CategoryTitle={"History"} filmsCategory={history} /* handleModal={handleModal} *//>
