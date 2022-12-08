@@ -14,7 +14,7 @@
         format('truetype');
   }
   header {
-    @apply fixed top-0 z-50 flex w-full items-center justify-between px-4 transition-all lg:px-10;
+    @apply fixed top-0 z-40 flex w-full items-center justify-between px-4 transition-all lg:px-10;
   }
   footer {
     @apply px-4 lg:px-10 flex justify-center
@@ -24,5 +24,8 @@
 @layer components {
   .bannerButton {
     @apply flex cursor-pointer items-center gap-x-2 rounded px-5 py-1.5 text-xs font-semibold transition-all duration-500 hover:opacity-75 md:py-2.5 md:px-8 md:text-base;
+  }
+  .swiper-button-prev {
+    @apply !bg-red-400 !color-red-600 !h-10 !w-4
   }
 }
