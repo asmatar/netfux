@@ -7,7 +7,8 @@ import { modalClose } from '../redux/modalReducer'
 import { addToMyList, removeFromMyList } from '../redux/favoriteReducer'
 import Link from 'next/link'
 import Loader from './UI/Loader'
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Modal = () => {
   const currentFilmId = useSelector(state => state.modal.id)
@@ -92,6 +93,8 @@ const Modal = () => {
      
     
      <div class="modal animate-fade fixed top-0 left-0 right-0 bottom-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto bg-black/60 z-50 flex items-center justify-center" /* onClick={() => setShowModal(false)} */>
+     <ToastContainer />
+        
         <div className="min-w-full w-full big-phone:min-w-[85%] big-phone:w-[85%] lg:w-[850px] lg:min-w-[850px] mt-28 big-phone:mt-0">
       
 
