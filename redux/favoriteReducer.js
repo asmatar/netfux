@@ -7,24 +7,18 @@ const favoriteSlice = createSlice({
   name: 'favorite',
   initialState,
   reducers: {
-    addToMyList (state, action) {
-        console.log("add to my list reducer", action.payload)
-        console.log(action.payload.id)
+    addToMyList (state, action) {                
         const isExist = state.favorite.find(item => item.id === action.payload.id)
         if (!isExist) {
             state.favorite.push(action.payload)
-        } else {
-            console.log("duplicate")
+        } else {            
         }
     },
-    removeFromMyList (state, action) {
-      console.log("id", action.payload)
+    removeFromMyList (state, action) {      
       const isExist = state.favorite.find(item => item.id === action.payload)
-      if (isExist) {
-        console.log("first")
+      if (isExist) {        
         state.favorite = state.favorite.filter(item => item.id !== action.payload)
-      } else {
-        console.log("no")
+      } else {        
       }
     }, 
   },

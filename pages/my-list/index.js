@@ -4,13 +4,12 @@ import Films from '../../components/Films';
 import {useSelector} from "react-redux"
 function List() {
   const favoriteMovies = useSelector(state=> state.favorite.favorite)
-  console.log("favoriteMovies", favoriteMovies)
   const displayFavoriteMovie = favoriteMovies.map(movie=>(
-    console.log("movie",movie),
+
     <Films key={favoriteMovies.index} films={movie}/>
   ))
   const favorite = useSelector(state => state.favorite.favorite)
-  console.log(displayFavoriteMovie)
+
   return (
    <>
     <Head>

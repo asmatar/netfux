@@ -23,7 +23,7 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
   useEffect(() => {
       dispatch(modalClose(router.query.id))
   }, [dispatch, router.query.id])
-  console.log(reviewsData)
+
   return (
     <section className="bg-cover flex w-full bg-center px-4"
     style={{backgroundImage:`linear-gradient(to bottom, rgba(0,0,0, .8) 0%, rgba(0,0,0, .8) 100%) , url(${path})`}}>

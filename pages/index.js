@@ -6,7 +6,8 @@ import {request} from "../utils/request"
 import { wrapper } from '../redux/store';
 import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic'
-import {useState} from "react"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { getNetflixOriginalsFilm, getTrendingFilm, getTopRatedFilm, getHistoryFilm, getScienceFictionFilm, getActionFilm, getDocumentariesFilm, getAnimationFilm, getAdventureFilm, getRomanceFilm, getComedyFilm, getHorrorFilm, getFantasyFilm, getCrimeFilm, getDramaFilm, getFamilyFilm } from '../redux/filmReducer';
 const Modal = dynamic(() => import('../components/Modal'), {
@@ -18,13 +19,14 @@ export default function Home() {
 
   /* const handleModal = (currentFilmId) => {
   setCurrentFilm(currentFilmId)
-   console.log("first", showModal, currentFilmId)
    setShowModal(true)
  }  */
   const { netflixOriginals, trending, topRated, history, scienceFiction, action, documentaries, animation, adventure, romance, comedy, horror, crime, drama, fantasy, family } = useSelector((state) => state.films)
   const {show} = useSelector(state => state.modal)
   const {favorite} = useSelector(state => state.favorite)
-  console.log(favorite)
+  const filteredMovie = useSelector(state => state.films.filteredMovie)
+  const activeSearch = useSelector(state => state.films.activeSearch)
+  console.log("filteredFilm")
   return (
     <div>
       <Head>
@@ -35,8 +37,11 @@ export default function Home() {
       <main>
         <Banner />
         <section className="flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12">
+        <ToastContainer />
+          { filteredMovie.length <1 && activeSearch === false ? (
+          <>
           <Row CategoryTitle={"Netflix Originals"} filmsCategory={netflixOriginals} /* handleModal={handleModal} *//>
-          { favorite.length >0  && <Row CategoryTitle={"My list"} filmsCategory={favorite} /* handleModal={handleModal} *//>}
+          { favorite.length >0  && <Row CategoryTitle={"My list"} filmsCategory={favorite}  /* handleModal={handleModal} */ />}
           <Row CategoryTitle={"Top Rated"} filmsCategory={topRated} /* handleModal={handleModal} *//>
           <Row CategoryTitle={"Trending"} filmsCategory={trending} /* handleModal={handleModal} *//>
           <Row CategoryTitle={"History"} filmsCategory={history} /* handleModal={handleModal} *//>
@@ -52,13 +57,19 @@ export default function Home() {
           <Row CategoryTitle={"Drama"} filmsCategory={drama} /* handleModal={handleModal} *//>
           <Row CategoryTitle={"Fantasy"} filmsCategory={fantasy} /* handleModal={handleModal} *//>
           <Row CategoryTitle={"Family"} filmsCategory={family} /* handleModal={handleModal} *//>
+          </>)
+          :
+          (filteredMovie.length <1 && activeSearch === true) ?
+          <p className='py-20 font-NetflixBold text-red-700 text-4 xl'>There is no movie that match with your search</p>
+          : 
+          <Row CategoryTitle={"Your Movies results"} filmsCategory={filteredMovie} /* handleModal={handleModal} *//>
+        }
         </section>
       </main>
       { show && <Modal /* setShowModal={setShowModal} currentFilmId={currentFilmId} *//>}
     </div>
   );
 }
-
 export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
   
   const [fetchActionMovies, fetchAdventureMovies, fetchAnimationMovies,fetchCrimeMovies,fetchComedyMovies,fetchDocumentariesMovies, fetchDramaMovies,fetchFamilyMovies,  fetchFantasyMovies, fetchHistoryMovies, fetchHorrorMovies, fetchNetflixOriginalsMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchTopRatedMovies, fetchTrendingMovies] = await Promise.all([

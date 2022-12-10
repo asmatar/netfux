@@ -9,7 +9,6 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     modalOpen (state, action) {
-      console.log(action.payload)
       state.id = action.payload,
       state.show = true
     },

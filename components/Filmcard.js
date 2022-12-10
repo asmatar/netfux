@@ -25,7 +25,10 @@ const FilmCard = ({film/* , handleModal */}) => {
           layout="fill"
           alt="film card image"
         />
-        <p className="absolute flex h-full items-end bottom-0 left-0 w-full bg-black/40 text-xs hover:opacity-100 hover:visible visible opacity-0 transition duration-200 ease">{film?.overview.substring(0, 100) + "..."}</p>
+        <div className="absolute flex flex-col items-start justify-end gap-y-2 h-full bottom-0 left-0 w-full bg-black/40 text-xs hover:opacity-100 hover:visible visible opacity-0 transition duration-200 ease">
+          <h6 className="font-NetflixBold self-start">{film?.title}</h6>
+          <p className="">{film?.overview?.substring(0, 100) + "..."}</p> 
+        </div>
       </div> 
     </>
   )
