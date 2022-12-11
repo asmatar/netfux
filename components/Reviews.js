@@ -26,7 +26,7 @@ const Reviews = ({reviews}) => {
           </svg>
           <h2 className="font-NetflixBold">Reviews</h2>
         </div>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+        <div className="grid grid-cols-1 big-phone:grid-cols-2  gap-x-6 gap-y-6">
           {displayReview}
         </div>
       </div>

@@ -4,6 +4,7 @@ import CastCard from './CastCard'
 const  Casting = ({cast}) => {
 
     const displayCard = cast.slice(0,5).map(actor=> (
+        console.log(actor),
             <CastCard
                 key={actor.id}
                 name = {actor.name}
@@ -21,7 +22,7 @@ const  Casting = ({cast}) => {
             <h2 className="font-NetflixBold">Cast</h2>
         </div>
         {/* card in a composant */}
-        <div className="flex justify-between">
+        <div className="flex justify-center xl:justify-between flex-wrap gap-4">
         {displayCard}
         </div>
     </div>

@@ -5,22 +5,33 @@ import {useDispatch, useSelector} from "react-redux"
 import baseUrl from '../constant/movie'
 import Button from './UI/Button';
 import {modalOpen} from "../redux/modalReducer"
+import Loader from './UI/Loader';
+import {useRouter} from "next/router"
 function Banner() {
+  const router = useRouter()
+  console.log(router.pathname)
   const dispatch = useDispatch()
-  const netflixOriginals = useSelector((state) => state.films.netflixOriginals)
+  const netflixOriginals =  useSelector((state) => state.films.netflixOriginals)
+  const topRated =  useSelector((state) => state.serie.topRated)
+  console.log("top rated in banner",topRated)
+
+  const displayFilms = (router.pathname !== "/series") ? netflixOriginals : topRated ;
+
   const [movie, setMovie] = useState(null)
+  console.log("movie in banner", movie)
   useEffect(() => {
-    setMovie(netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)])
-  }, [netflixOriginals])
+    setMovie(displayFilms[Math.floor(Math.random() * displayFilms.length)])
+  }, [displayFilms])
   
 
   const handleModal = (id) => { 
-    console.log("id est : ",id)
     dispatch(modalOpen(id))
   }
 
-  return <div className="flex flex-col justify-end space-y-2 mt-8 md:space-y-4 h-[45vw] pb-[4vw] lg:pb-[8vw] pl-4 big-phone:pl-6 lg:pl-12" onMouseOver={console.log("ok")}>
-      <div className="flex items-center gap-x-2 self-start">
+  return   (movie ?
+    <>
+    <div className="flex flex-col justify-end space-y-2 mt-8 md:space-y-4 h-[45vw] pb-[4vw] lg:pb-[8vw] pl-4 big-phone:pl-6 lg:pl-12">
+     <div className="flex items-center gap-x-2 self-start">
      
       <div className="absolute top-0 left-0 -z-10  w-screen h-[56.25vw] !bg-gradient">
         <Image
@@ -28,7 +39,7 @@ function Banner() {
           src={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
           objectFit="cover"
           alt="banner image movie"
-        />
+          />
       </div>
       </div>
         <h1 className="text-lg big-phone:2xl font-bold sm:text-2xl md:text-4xl lg:text-6xl">
@@ -48,7 +59,11 @@ function Banner() {
           More Info
         </button>
       </div>
-    </div>
+      </div>
+      </>
+      :
+      <Loader/>)
+      
 }
 
 export default Banner;
