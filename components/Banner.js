@@ -6,13 +6,22 @@ import baseUrl from '../constant/movie'
 import Button from './UI/Button';
 import {modalOpen} from "../redux/modalReducer"
 import Loader from './UI/Loader';
+import {useRouter} from "next/router"
 function Banner() {
+  const router = useRouter()
+  console.log(router.pathname)
   const dispatch = useDispatch()
-  const netflixOriginals = useSelector((state) => state.films.netflixOriginals)
+  const netflixOriginals =  useSelector((state) => state.films.netflixOriginals)
+  const topRated =  useSelector((state) => state.serie.topRated)
+  console.log("top rated in banner",topRated)
+
+  const displayFilms = (router.pathname !== "/series") ? netflixOriginals : topRated ;
+
   const [movie, setMovie] = useState(null)
+  console.log("movie in banner", movie)
   useEffect(() => {
-    setMovie(netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)])
-  }, [netflixOriginals])
+    setMovie(displayFilms[Math.floor(Math.random() * displayFilms.length)])
+  }, [displayFilms])
   
 
   const handleModal = (id) => { 

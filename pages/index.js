@@ -60,7 +60,7 @@ export default function Home() {
           </>)
           :
           (filteredMovie.length <1 && activeSearch === true) ?
-          <p className='py-20 font-NetflixBold text-red-700 text-4 xl'>There is no movie that match with your search</p>
+          <p className='py-20 font-NetflixBold text-red-700 text-4xl'>There is no movie that match with your search</p>
           : 
           <Row CategoryTitle={"Your Movies results"} filmsCategory={filteredMovie} /* handleModal={handleModal} *//>
         }
@@ -77,7 +77,7 @@ export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
   ]);
   
   const [ActionMovies, AdventureMovies, AnimationMovies,CrimeMovies,ComedyMovies,Documentaries, DramaMovies,FamilyMovies,  FantasyMovies, HistoryMovies, HorrorMovies, NetflixOriginalsMovies, RomanceMoviesMovies, ScienceFictionMovies, TopRatedMovies, TrendingMovies] = await Promise.all([fetchActionMovies.json(), fetchAdventureMovies.json(), fetchAnimationMovies.json(),fetchCrimeMovies.json(),fetchComedyMovies.json(),fetchDocumentariesMovies.json(), fetchDramaMovies.json(),fetchFamilyMovies.json(),  fetchFantasyMovies.json(), fetchHistoryMovies.json(), fetchHorrorMovies.json(), fetchNetflixOriginalsMovies.json(), fetchRomanceMovies.json(), fetchScienceFictionMovies.json(), fetchTopRatedMovies.json(), fetchTrendingMovies.json()])
-    
+
   wrapper.dispatch(getActionFilm(ActionMovies.results))
   wrapper.dispatch(getAdventureFilm(AdventureMovies.results))
   wrapper.dispatch(getAnimationFilm(AnimationMovies.results))

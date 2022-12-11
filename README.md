@@ -38,12 +38,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 a changer
 
 - header search button => pas centrer + verifier responsive comportement
-- row => faire carousel scroll avec btn
-- tenter de faire le petit slider sur le carousel - - - -
-- cardFilm => on hover info film
-- cardFilm => modal on click + info
-- click sur film va sur detail
-- play => lance le trailer
-- search a implementer
-- search by genre
+- carousel detail responsive
+- ajouter le titre sur la modal de film
+- le site est lent
+- modal quand on change de page se relance a voir pk
+- modal pour les acteurs
 - hover card use transition
+- login
+- login avec twt token
+- react hook form password
+- si pas de picture ou de description mettre une photo ou un text random
+- favoris seprer les movie des tv et rendre les movies solo sur la page movie et tv solo sur la page tv
+- faire des hook
+- function ultis et clean code
+- modal si no trailer rendre possible les favoris et le botton 
+- fetch useEffect avec useSRW hook
