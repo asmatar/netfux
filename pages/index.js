@@ -72,14 +72,14 @@ export default function Home() {
 }
 export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
   
-  const [fetchActionMovies, fetchAdventureMovies, fetchAnimationMovies,fetchCrimeMovies,fetchComedyMovies,fetchDocumentariesMovies, fetchDramaMovies,fetchFamilyMovies,  fetchFantasyMovies, fetchHistoryMovies, fetchHorrorMovies, fetchNetflixOriginalsMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchTopRatedMovies, fetchTrendingMovies] = await Promise.all([
-    fetch(request.fetchAction), fetch(request.fetchAdventure), fetch(request.fetchAnimation), fetch(request.fetchCrime), fetch(request.fetchComedy), fetch(request.fetchDocumentaries), fetch(request.fetchDrama), fetch(request.fetchFamily), fetch(request.fetchFantasy), fetch(request.fetchHistory), fetch(request.fetchHorror), fetch(request.fetchNetflixOriginals), fetch(request.fetchRomance), fetch(request.fetchScienceFiction), fetch(request.fetchTopRated), fetch(request.fetchTrending)
+  const [fetchActionMovies/* , fetchAdventureMovies, fetchAnimationMovies,fetchCrimeMovies,fetchComedyMovies,fetchDocumentariesMovies, fetchDramaMovies,fetchFamilyMovies,  fetchFantasyMovies, fetchHistoryMovies, fetchHorrorMovies, fetchNetflixOriginalsMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchTopRatedMovies, fetchTrendingMovies */] = await Promise.all([
+    fetch(request.fetchAction)/* , fetch(request.fetchAdventure), fetch(request.fetchAnimation), fetch(request.fetchCrime), fetch(request.fetchComedy), fetch(request.fetchDocumentaries), fetch(request.fetchDrama), fetch(request.fetchFamily), fetch(request.fetchFantasy), fetch(request.fetchHistory), fetch(request.fetchHorror), fetch(request.fetchNetflixOriginals), fetch(request.fetchRomance), fetch(request.fetchScienceFiction), fetch(request.fetchTopRated), fetch(request.fetchTrending) */
   ]);
   
-  const [ActionMovies, AdventureMovies, AnimationMovies,CrimeMovies,ComedyMovies,Documentaries, DramaMovies,FamilyMovies,  FantasyMovies, HistoryMovies, HorrorMovies, NetflixOriginalsMovies, RomanceMoviesMovies, ScienceFictionMovies, TopRatedMovies, TrendingMovies] = await Promise.all([fetchActionMovies.json() || null, fetchAdventureMovies.json() || null, fetchAnimationMovies.json() || null,fetchCrimeMovies.json() || null,fetchComedyMovies.json() || null,fetchDocumentariesMovies.json() || null, fetchDramaMovies.json() || null,fetchFamilyMovies.json() || null,  fetchFantasyMovies.json() || null, fetchHistoryMovies.json() || null, fetchHorrorMovies.json() || null, fetchNetflixOriginalsMovies.json() || null, fetchRomanceMovies.json() || null, fetchScienceFictionMovies.json() || null, fetchTopRatedMovies.json() || null, fetchTrendingMovies.json() || null])
+  const [ActionMovies/* , AdventureMovies, AnimationMovies,CrimeMovies,ComedyMovies,Documentaries, DramaMovies,FamilyMovies,  FantasyMovies, HistoryMovies, HorrorMovies, NetflixOriginalsMovies, RomanceMo viesMovies, ScienceFictionMovies, TopRatedMovies, TrendingMovies*/] = await Promise.all([fetchActionMovies.json() || null/* , fetchAdventureMovies.json() || null, fetchAnimationMovies.json() || null,fetchCrimeMovies.json() || null,fetchComedyMovies.json() || null,fetchDocumentariesMovies.json() || null, fetchDramaMovies.json() || null,fetchFamilyMovies.json() || null,  fetchFantasyMovies.json() || null, fetchHistoryMovies.json() || null, fetchHorrorMovies.json() || null, fetchNetflixOriginalsMovies.json() || null, fetchRomanceMovies.json() || null, fetchScienceFictionMovies.json() || null, fetchTopRatedMovies.json() || null, fetchTrendingMovies.json() || null */])
 
   wrapper.dispatch(getActionFilm(ActionMovies.results))
-  wrapper.dispatch(getAdventureFilm(AdventureMovies.results))
+  /* wrapper.dispatch(getAdventureFilm(AdventureMovies.results))
   wrapper.dispatch(getAnimationFilm(AnimationMovies.results))
   wrapper.dispatch(getCrimeFilm(CrimeMovies.results))
   wrapper.dispatch(getComedyFilm(ComedyMovies.results))
@@ -93,7 +93,7 @@ export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
   wrapper.dispatch(getRomanceFilm(RomanceMoviesMovies.results))
   wrapper.dispatch(getScienceFictionFilm(ScienceFictionMovies.results))
   wrapper.dispatch(getTopRatedFilm(TopRatedMovies.results))
-  wrapper.dispatch(getTrendingFilm(TrendingMovies.results))
+  wrapper.dispatch(getTrendingFilm(TrendingMovies.results)) */
 
   return {
     props: {
