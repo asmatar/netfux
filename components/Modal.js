@@ -69,7 +69,7 @@ const Modal = () => {
       console.log("error")
     }
     setLoading(true)
-  }, [currentFilmId, trailer])
+  }, [currentFilmId, trailer, filmOrMovie])
     const handleMute = () => {
     setMuted((prev) => !prev)
   }
