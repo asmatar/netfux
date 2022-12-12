@@ -7,7 +7,7 @@ const initialState = {
   topRated: [] || null,
   history: [] || null,
   scienceFiction: [] || null,
-  action: [] || null,
+  action:  null,
   documentaries: [] || null,
   animation: [] || null,
   adventure: [] || null,
