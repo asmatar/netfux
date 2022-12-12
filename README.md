@@ -48,8 +48,14 @@ a changer
 - login avec twt token
 - react hook form password
 - si pas de picture ou de description mettre une photo ou un text random
-- favoris seprer les movie des tv et rendre les movies solo sur la page movie et tv solo sur la page tv
+- favoris separer les movie des tv et rendre les movies solo sur la page movie et tv solo sur la page tv
 - faire des hook
-- function ultis et clean code
+- function ultis et clean code, refacto
 - modal si no trailer rendre possible les favoris et le botton 
-- fetch useEffect avec useSRW hook
+- fetch useEffect avec **useSRW** hook
+- local storage user and favoris
+- search serie
+- auth cour 2h
+- auth youtube 4h
+- api et cour 6h
+- react 9h
