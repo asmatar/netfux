@@ -95,6 +95,11 @@ export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
   wrapper.dispatch(getTopRatedFilm(TopRatedMovies.results))
   wrapper.dispatch(getTrendingFilm(TrendingMovies.results))
 
+  return {
+    props: {
+    }
+  }
+
   // revalidation : 10 sec => refetch after 10sec
   // not Found => true or false, if true => render 404 page, il fail to fetch data
   // redirect => user is redirect to another route redirect : {destination:"/"}
