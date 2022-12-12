@@ -52,7 +52,7 @@ function Header() {
         :
           <div className="relative flex items-center gap-x-6">
             <div className="relative hidden small-tab:flex">
-              <input type="search" placeholder="Title..." value={search} className={`{relative peer z-10 h-10 w-10 cursor-pointer rounded-full border ${search !== "" ? "" : ""} bg-transparent pl-10 outline-none transition-all duration-200 ease-in focus:w-full focus:cursor-text focus:border-red-600 focus:pl-16 focus:pr-4}`} onChange={(event)=> {setSearch(()=> event.target.value), handleSearchName(event)}} />
+              <input type="search" placeholder="Title..." value={search} className={`{relative peer z-10 h-10 w-10 cursor-pointer rounded-full border bg-transparent pl-10 outline-none transition-all duration-200 ease-in focus:w-full focus:cursor-text focus:border-red-600 focus:pl-16 focus:pr-4}`} onChange={(event)=> {setSearch(()=> event.target.value), handleSearchName(event)}} />
               <svg xmlns="http://www.w3.org/2000/svg" className="absolute inset-y-0 my-auto h-8 w-12 border-r border-transparent stroke-gray-500 px-3.5 peer-focus:border-red-600 peer-focus:stroke-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
