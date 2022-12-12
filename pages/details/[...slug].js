@@ -64,7 +64,7 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
   console.log("detailData", detailData)
   return (
     <section className="bg-cover flex w-full justify-center bg-center"
-    style={{backgroundImage:`linear-gradient(to bottom, rgba(0,0,0, .8) 0%, rgba(0,0,0, .8) 100%) , url(${path})`}}>
+    style={{backgroundImage:`linear-gradient(to bottom, rgba(0,0,0, .8) 0%, rgba(0,0,0, .8) 100%), url(${path})`}}>
      <ToastContainer />
 
       {/* detail */}
