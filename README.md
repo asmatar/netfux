@@ -32,3 +32,30 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+a changer
+
+- header search button => pas centrer + verifier responsive comportement
+- carousel detail responsive
+- ajouter le titre sur la modal de film
+- le site est lent
+- modal quand on change de page se relance a voir pk
+- modal pour les acteurs
+- hover card use transition
+- login
+- login avec twt token
+- react hook form password
+- si pas de picture ou de description mettre une photo ou un text random
+- favoris separer les movie des tv et rendre les movies solo sur la page movie et tv solo sur la page tv
+- faire des hook
+- function ultis et clean code, refacto
+- modal si no trailer rendre possible les favoris et le botton 
+- fetch useEffect avec **useSRW** hook
+- local storage user and favoris
+- search serie
+- auth cour 2h
+- auth youtube 4h
+- api et cour 6h
+- react 9h
