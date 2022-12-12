@@ -2,19 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
 const initialState = {
-    animation: [],
-    comedy: [],
-    crime: [],
-    documentaries: [],
-    drama: [],
-    family: [],
-    kids: [],
-    mystery: [],
-    news: [],
-    reality: [],
-    talk: [],
-    topRated: [],
-    filteredMovie: [],
+    animation: [] || null,
+    comedy: [] || null,
+    crime: [] || null,
+    documentaries: [] || null,
+    drama: [] || null,
+    family: [] || null,
+    kids: [] || null,
+    mystery: [] || null,
+    news: [] || null,
+    reality: [] || null,
+    talk: [] || null,
+    topRated: [] || null,
+    filteredMovie: [] || null,
     activeSearch: false
 };
 const serieSlice = createSlice({
