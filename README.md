@@ -1,61 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Netflix clone
 
-## Getting Started
+This app is a Netflix clone, with some custom modification. I used TMDB api to fetch series and movies, and react player to launch the trailer on youtube. Some movies or series have no trailer, it's not a. ug, just this data is not availiable for some of these
 
-First, run the development server:
+# Feature
 
-```bash
+• Movie or serie list
+
+• Possibility to have some favorite movie, and see them on the list page
+
+• Display your favorite serie and movies
+
+• Carousel for the movie categories
+
+• access to a modal with more details when you click on the movie's picture
+
+• you can watch the trailer if availiable in the TMDB api
+
+• Login / logout with next auth
+
+• keep the favorite in local storage
+
+• film and movie detail page that give you access to the casting, similar movies, some information about the movie
+
+
+
+# Tecnologies
+
+• Nextjs
+
+• Tailwindcss
+
+• Fetch data TMDB
+
+• Redux toolkit
+
+• Context api
+
+• Swiperjs
+
+• Next auth
+
+
+# Launch
 npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-
-
-a changer
-
-- header search button => pas centrer + verifier responsive comportement
-- carousel detail responsive
-- ajouter le titre sur la modal de film
-- le site est lent
-- modal quand on change de page se relance a voir pk
-- modal pour les acteurs
-- hover card use transition
-- login
-- login avec twt token
-- react hook form password
-- si pas de picture ou de description mettre une photo ou un text random
-- favoris separer les movie des tv et rendre les movies solo sur la page movie et tv solo sur la page tv
-- faire des hook
-- function ultis et clean code, refacto
-- modal si no trailer rendre possible les favoris et le botton 
-- fetch useEffect avec **useSRW** hook
-- local storage user and favoris
-- search serie
-- auth cour 2h
-- auth youtube 4h
-- api et cour 6h
-- react 9h
