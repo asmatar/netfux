@@ -16,6 +16,8 @@ This app is a Netflix clone, with some custom modification. I used TMDB api to f
 
 • you can watch the trailer if availiable in the TMDB api
 
+• Notification system when You add or delete a favorite
+
 • Login / logout with next auth
 
 • keep the favorite in local storage
