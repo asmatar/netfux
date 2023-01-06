@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom'
 import baseUrl from "../constant/movie"
 const CastModal = ({handleCloseCardModal, id}) => {
     const [casting, setCasting] = useState(null)
-    console.log("cast modal id", id)
+    const existPicture = casting?.picture ? `https://image.tmdb.org/t/p/original${casting?.profile_path}` : "/anonyme.jpeg"
+
     useEffect(() => {
         const fetchDetailCasting = async () => {
         const response = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`)
@@ -22,7 +23,7 @@ const CastModal = ({handleCloseCardModal, id}) => {
             </div>
             <div class="flex h-full">
                 <div class="h-full w-[375px]">
-                    <img class="h-full w-full object-top object-cover" src={`https://image.tmdb.org/t/p/original/${casting?.profile_path}`} alt="" />
+                    <img class="h-full w-full object-top object-cover" src={existPicture} alt="" />
                 </div>
                 <div className="w-[375px]">
                     <div class="p-4">

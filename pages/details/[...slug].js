@@ -119,7 +119,7 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
         {/* casting */}
         < Casting cast={castData} />
         {/* review */}
-        {reviewsData.length !== 0 && < Reviews reviews={reviewsData} />} 
+        {reviewsData.length !== 0 && < Reviews reviews={reviewsData} />  } 
         {/* similar */}
         <div className="">
         <div className="flex items-center gap-x-4 mb-6">
