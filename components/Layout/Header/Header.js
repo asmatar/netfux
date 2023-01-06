@@ -7,9 +7,11 @@ import Button from '../../UI/Button';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import {searchByName} from "../../../redux/filmReducer"
+import {searchSeriesByName} from "../../../redux/serieReducer"
 function Header() {
   const [search, setSearch] = useState("")
   const {pathname} = useRouter()
+  console.log(pathname)
   const [isScroll, setIsScroll] = useState(false);
   const dispatch = useDispatch()
   const handleScroll = () => {
@@ -20,6 +22,9 @@ function Header() {
     }
   };
   const handleSearchName = (event) => {
+    pathname.includes("series") ?
+    dispatch(searchSeriesByName(event.target.value), setSearch(()=> event.target.value))
+    :
     dispatch(searchByName(event.target.value), setSearch(()=> event.target.value))
   }
 

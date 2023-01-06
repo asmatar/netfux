@@ -14,7 +14,7 @@ const initialState = {
     reality: [] || null,
     talk: [] || null,
     topRated: [] || null,
-    filteredMovie: [] || null,
+    filteredSeries: [] || null,
     activeSearch: false
 };
 const serieSlice = createSlice({
@@ -56,7 +56,24 @@ const serieSlice = createSlice({
     },
     getTopRatedTv (state, action) {
       state.topRated = action.payload
-    }
+    },
+    searchSeriesByName (state, action) {
+      console.log(action.payload)
+      if (action.payload == "") { 
+        state.filteredSeries = [] 
+        state.activeSearch = false
+      } else {
+        console.log(state.reality)
+        let allSeries = [...state.animation, ...state.comedy, ...state.crime, ...state.documentaries, ...state.drama, ...state.family, ...state.kids, ...state.mystery, ...state.news, ...state.reality, ...state.talk, ...state.topRated]
+        console.log(allSeries)
+        const uniqueSerie = Array.from(new Set(allSeries.map(serie => serie.id))).map(id => {
+          return allSeries.find(serie => serie.id === id)
+        })
+        console.log(uniqueSerie)
+        state.filteredSeries = uniqueSerie.filter(serie => serie.name?.toLowerCase().includes(action.payload.toLowerCase()))
+        state.activeSearch = true
+      }
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -68,6 +85,6 @@ const serieSlice = createSlice({
   },  
 });
 
-export const {getAnimationTv, getComedyTv, getCrimeTv, getDocumentariesTv, getDramaTv, getFamilyTv, getKidsTv, getMysteryTv, getNewsTv,getRealityTv, getTalkTv, getTopRatedTv} = serieSlice.actions;
+export const {getAnimationTv, getComedyTv, getCrimeTv, getDocumentariesTv, getDramaTv, getFamilyTv, getKidsTv, getMysteryTv, getNewsTv,getRealityTv, getTalkTv, getTopRatedTv, searchSeriesByName} = serieSlice.actions;
 
 export default serieSlice.reducer;
