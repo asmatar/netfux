@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import baseUrl from "../constant/movie"
 const CastModal = ({handleCloseCardModal, id}) => {
     const [casting, setCasting] = useState(null)
-    const existPicture = casting?.picture ? `https://image.tmdb.org/t/p/original${casting?.profile_path}` : "/anonyme.jpeg"
+    const existPicture = casting?.profile_path ? `https://image.tmdb.org/t/p/original${casting?.profile_path}` : "/anonyme.jpeg"
 
     useEffect(() => {
         const fetchDetailCasting = async () => {
