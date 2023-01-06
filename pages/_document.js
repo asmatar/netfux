@@ -22,6 +22,7 @@ class MyDocument extends Document {
       <body>
         <div id="overlay"></div>
         <div id="modal"></div>
+        <div id="modalCast"></div>
         <Main />
         <NextScript />
       </body>

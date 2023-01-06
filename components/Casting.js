@@ -1,12 +1,26 @@
-import React from 'react'
-import Image from 'next/image'
+import React, {useState} from 'react'
+import dynamic from 'next/dynamic'
 import CastCard from './CastCard'
+const CastModal = dynamic(() => import('./CastModal'), {
+    ssr: false,
+})
 const  Casting = ({cast}) => {
-
+    const [openCardModal, setOpenCardModal] = useState(false)
+    const [currentActorId, setCurrentActorId] = useState(null)
+    const handleOpenCardModal = (id) => {
+        console.log("in open cared modal id", id)
+        setOpenCardModal(true)
+        setCurrentActorId(id)
+    }
+    const handleCloseCardModal = () => {
+        setOpenCardModal(false)
+    }
+    console.log(cast)
     const displayCard = cast.slice(0,5).map(actor=> (
-        console.log(actor),
             <CastCard
+                handleOpenCardModal={handleOpenCardModal}
                 key={actor.id}
+                id={actor.id}
                 name = {actor.name}
                 picture = {actor?.profile_path}
             />
@@ -14,6 +28,7 @@ const  Casting = ({cast}) => {
     )
 
   return (
+    <>
     <div className="flex flex-col gap-y-4">
         <div className="flex gap-x-4 items-center">
             <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,7 +40,9 @@ const  Casting = ({cast}) => {
         <div className="flex justify-center xl:justify-between flex-wrap gap-4">
         {displayCard}
         </div>
+        {openCardModal && <CastModal id={currentActorId} handleCloseCardModal={handleCloseCardModal}/>}
     </div>
+    </>
   )
 }
 

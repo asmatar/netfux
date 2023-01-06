@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
 const initialState = {
-  netflixOriginals:  null,
+  netflixOriginals: [] || null,
   trending: [] || null,
   topRated: [] || null,
   history: [] || null,

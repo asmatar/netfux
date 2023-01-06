@@ -23,7 +23,7 @@ export default function Series() {
  }  */
   const { animation, comedy, crime, documentaries, drama, family, kids, mystery, news, reality, talk, topRated } = useSelector((state) => state.serie)
   const {show} = useSelector(state => state.modal)
-  const {favorite} = useSelector(state => state.favorite)
+  const {favoriteSeries} = useSelector(state => state.favorite)
   const filteredMovie = useSelector(state => state.films.filteredMovie)
   const activeSearch = useSelector(state => state.films.activeSearch)
   console.log("filteredFilm")
@@ -41,28 +41,28 @@ export default function Series() {
         <ToastContainer />
           { filteredMovie.length <1 && activeSearch === false ? (
           <>
-          <Row CategoryTitle={"Animation"} filmsCategory={animation} /* handleModal={handleModal} *//>
-          { favorite.length >0  && <Row CategoryTitle={"My list"} filmsCategory={favorite}  /* handleModal={handleModal} */ />}
-          <Row CategoryTitle={"Comedy"} filmsCategory={comedy} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"Crime"} filmsCategory={crime} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"Documentaries"} filmsCategory={documentaries} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"Drama"} filmsCategory={drama} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"Family"} filmsCategory={family} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"Kids"} filmsCategory={kids} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"Mystery"} filmsCategory={mystery} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"News"} filmsCategory={news} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"Reality"} filmsCategory={reality} /* handleModal={handleModal} *//>
-          <Row CategoryTitle={"Talk"} filmsCategory={talk} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Animation"} filmsCategory={animation}/>
+          { favoriteSeries.length >0  && <Row CategoryTitle={"My list"} filmsCategory={favoriteSeries}  />}
+          <Row CategoryTitle={"Comedy"} filmsCategory={comedy}/>
+          <Row CategoryTitle={"Crime"} filmsCategory={crime}/>
+          <Row CategoryTitle={"Documentaries"} filmsCategory={documentaries}/>
+          <Row CategoryTitle={"Drama"} filmsCategory={drama}/>
+          <Row CategoryTitle={"Family"} filmsCategory={family}/>
+          <Row CategoryTitle={"Kids"} filmsCategory={kids}/>
+          <Row CategoryTitle={"Mystery"} filmsCategory={mystery}/>
+          <Row CategoryTitle={"News"} filmsCategory={news}/>
+          <Row CategoryTitle={"Reality"} filmsCategory={reality}/>
+          <Row CategoryTitle={"Talk"} filmsCategory={talk}/>
           </>)
           :
           (filteredMovie.length <1 && activeSearch === true) ?
           <p className='py-20 font-NetflixBold text-red-700 text-4xl'>There is no movie that match with your search</p>
           : 
-          <Row CategoryTitle={"Your Movies results"} filmsCategory={filteredMovie} /* handleModal={handleModal} *//>
+          <Row CategoryTitle={"Your Movies results"} filmsCategory={filteredMovie}/>
         }
         </section>
       </main>
-      { show && <Modal /* setShowModal={setShowModal} currentFilmId={currentFilmId} *//>}
+      { show && <Modal/>}
     </div>
   );
 }

@@ -15,15 +15,20 @@ const Modal = dynamic(() => import('../../components/Modal'), {
   ssr: false,
 })
 const Detail = ({reviewsData, castData, similarData, detailData}) => {
+  console.log(castData)
+  const router = useRouter()
   const dispatch = useDispatch()
-  const CurrentFavorite = useSelector(state => state.favorite.favorite)
+  const type = (router.pathname === "/series" || router.query.slug[0] === "tv") ? "tv" : "movie"
+  const CurrentFavoriteMovie = useSelector(state => state.favorite.favoriteMovies)
+  const CurrentFavoriteSerie = useSelector(state => state.favorite.favoriteSeries)
+  let CurrentFavorite = type === "movie" ? CurrentFavoriteMovie : CurrentFavoriteSerie
   const [favorite, setFavorite] = useState(false)
   const path = `https://image.tmdb.org/t/p/original${detailData?.backdrop_path || detailData?.poster_path}`
-  const handleModal = (id) => {
-    dispatch(modalOpen(id))
+  const handleModal = (id, type) => {
+    dispatch(modalOpen({id, type}))
   } 
-  const handleFavorite = (movie) => {
-    dispatch(addToMyList(movie),
+  const handleFavorite = (movie, type) => {
+    dispatch(addToMyList({movie, type}),
     setFavorite(true),
     toast.success('Add to my favorite', {
       position: "bottom-right",
@@ -53,17 +58,10 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
      )
    }
   const {show} = useSelector(state => state.modal)
-  const router = useRouter()
-  console.log(router.query.slug[1])
   const favoriteCurrentId = CurrentFavorite.find(fav => fav.id === +router.query.slug[1])
-  console.log("favo id", favoriteCurrentId)
-  useEffect
-  useEffect(() => {
-      dispatch(modalClose(favoriteCurrentId))
-  }, [dispatch, favoriteCurrentId])
-  console.log("detailData", detailData)
+ 
   return (
-    <section className="bg-cover flex w-full justify-center bg-center"
+   <section className="bg-cover flex w-full justify-center bg-center"
     style={{backgroundImage:`linear-gradient(to bottom, rgba(0,0,0, .8) 0%, rgba(0,0,0, .8) 100%), url(${path})`}}>
      <ToastContainer />
 
@@ -94,7 +92,7 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.8935 8.22649L10.7126 10.0456C10.8608 10.1938 10.935 10.3793 10.935 10.6019C10.935 10.8239 10.8608 11.0158 10.7126 11.1775C10.5509 11.3392 10.359 11.4201 10.137 11.4201C9.91437 11.4201 9.72221 11.3392 9.56051 11.1775L7.84245 9.45945C7.6538 9.2708 7.51231 9.06194 7.41799 8.83286C7.32366 8.60379 7.2765 8.3545 7.2765 8.085V5.6595C7.2765 5.43042 7.35412 5.23827 7.50935 5.08304C7.66404 4.92835 7.85592 4.851 8.085 4.851C8.31407 4.851 8.50623 4.92835 8.66146 5.08304C8.81615 5.23827 8.8935 5.43042 8.8935 5.6595V8.22649ZM8.085 1.617C8.31407 1.617 8.50623 1.69435 8.66146 1.84904C8.81615 2.00427 8.8935 2.19642 8.8935 2.4255C8.8935 2.65457 8.81615 2.84673 8.66146 3.00196C8.50623 3.15665 8.31407 3.234 8.085 3.234C7.85592 3.234 7.66404 3.15665 7.50935 3.00196C7.35412 2.84673 7.2765 2.65457 7.2765 2.4255C7.2765 2.19642 7.35412 2.00427 7.50935 1.84904C7.66404 1.69435 7.85592 1.617 8.085 1.617ZM14.553 8.085C14.553 8.31407 14.4754 8.50596 14.3202 8.66065C14.1655 8.81588 13.9736 8.8935 13.7445 8.8935C13.5154 8.8935 13.3235 8.81588 13.1688 8.66065C13.0136 8.50596 12.936 8.31407 12.936 8.085C12.936 7.85592 13.0136 7.66377 13.1688 7.50854C13.3235 7.35385 13.5154 7.2765 13.7445 7.2765C13.9736 7.2765 14.1655 7.35385 14.3202 7.50854C14.4754 7.66377 14.553 7.85592 14.553 8.085ZM8.085 12.936C8.31407 12.936 8.50623 13.0136 8.66146 13.1688C8.81615 13.3235 8.8935 13.5154 8.8935 13.7445C8.8935 13.9736 8.81615 14.1655 8.66146 14.3202C8.50623 14.4754 8.31407 14.553 8.085 14.553C7.85592 14.553 7.66404 14.4754 7.50935 14.3202C7.35412 14.1655 7.2765 13.9736 7.2765 13.7445C7.2765 13.5154 7.35412 13.3235 7.50935 13.1688C7.66404 13.0136 7.85592 12.936 8.085 12.936ZM3.234 8.085C3.234 8.31407 3.15665 8.50596 3.00196 8.66065C2.84673 8.81588 2.65457 8.8935 2.4255 8.8935C2.19642 8.8935 2.00427 8.81588 1.84904 8.66065C1.69435 8.50596 1.617 8.31407 1.617 8.085C1.617 7.85592 1.69435 7.66377 1.84904 7.50854C2.00427 7.35385 2.19642 7.2765 2.4255 7.2765C2.65457 7.2765 2.84673 7.35385 3.00196 7.50854C3.15665 7.66377 3.234 7.85592 3.234 8.085ZM8.085 16.17C6.96657 16.17 5.91553 15.9576 4.93185 15.5329C3.94818 15.1087 3.09251 14.5328 2.36486 13.8051C1.63721 13.0775 1.06129 12.2218 0.637098 11.2381C0.212366 10.2545 0 9.20342 0 8.085C0 6.96657 0.212366 5.91553 0.637098 4.93185C1.06129 3.94818 1.63721 3.09251 2.36486 2.36486C3.09251 1.63721 3.94818 1.06102 4.93185 0.636289C5.91553 0.212096 6.96657 0 8.085 0C9.20342 0 10.2545 0.212096 11.2381 0.636289C12.2218 1.06102 13.0775 1.63721 13.8051 2.36486C14.5328 3.09251 15.1087 3.94818 15.5329 4.93185C15.9576 5.91553 16.17 6.96657 16.17 8.085C16.17 9.20342 15.9576 10.2545 15.5329 11.2381C15.1087 12.2218 14.5328 13.0775 13.8051 13.8051C13.0775 14.5328 12.2218 15.1087 11.2381 15.5329C10.2545 15.9576 9.20342 16.17 8.085 16.17ZM8.085 14.553C9.89065 14.553 11.4201 13.9264 12.6732 12.6732C13.9264 11.4201 14.553 9.89065 14.553 8.085C14.553 6.27935 13.9264 4.74994 12.6732 3.49676C11.4201 2.24359 9.89065 1.617 8.085 1.617C6.27935 1.617 4.74994 2.24359 3.49676 3.49676C2.24359 4.74994 1.617 6.27935 1.617 8.085C1.617 9.89065 2.24359 11.4201 3.49676 12.6732C4.74994 13.9264 6.27935 14.553 8.085 14.553Z" fill="#B91C1C"/>
                 </svg>
-                {detailData.runtime || detailData.episode_run_time[0]} min
+                {detailData.runtime || detailData?.episode_run_time[0]} min
               </p>
             </div>
             <p className="max-w-[850px] w-full text-justify">{detailData.overview}
@@ -105,11 +103,11 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="rotate-180 Hawkins-Icon Hawkins-Icon-Standard"><path fill-Rule="evenodd" clip-rule="evenodd" d="M10.696 8.7732C10.8947 8.45534 11 8.08804 11 7.7132V4H11.8377C12.7152 4 13.4285 4.55292 13.6073 5.31126C13.8233 6.22758 14 7.22716 14 8C14 8.58478 13.8976 9.1919 13.7536 9.75039L13.4315 11H14.7219H17.5C18.3284 11 19 11.6716 19 12.5C19 12.5929 18.9917 12.6831 18.976 12.7699L18.8955 13.2149L19.1764 13.5692C19.3794 13.8252 19.5 14.1471 19.5 14.5C19.5 14.8529 19.3794 15.1748 19.1764 15.4308L18.8955 15.7851L18.976 16.2301C18.9917 16.317 19 16.4071 19 16.5C19 16.9901 18.766 17.4253 18.3994 17.7006L18 18.0006L18 18.5001C17.9999 19.3285 17.3284 20 16.5 20H14H13H12.6228C11.6554 20 10.6944 19.844 9.77673 19.5382L8.28366 19.0405C7.22457 18.6874 6.11617 18.5051 5 18.5001V13.7543L7.03558 13.1727C7.74927 12.9688 8.36203 12.5076 8.75542 11.8781L10.696 8.7732ZM10.5 2C9.67157 2 9 2.67157 9 3.5V7.7132L7.05942 10.8181C6.92829 11.0279 6.72404 11.1817 6.48614 11.2497L4.45056 11.8313C3.59195 12.0766 3 12.8613 3 13.7543V18.5468C3 19.6255 3.87447 20.5 4.95319 20.5C5.87021 20.5 6.78124 20.6478 7.65121 20.9378L9.14427 21.4355C10.2659 21.8094 11.4405 22 12.6228 22H13H14H16.5C18.2692 22 19.7319 20.6873 19.967 18.9827C20.6039 18.3496 21 17.4709 21 16.5C21 16.4369 20.9983 16.3742 20.995 16.3118C21.3153 15.783 21.5 15.1622 21.5 14.5C21.5 13.8378 21.3153 13.217 20.995 12.6883C20.9983 12.6258 21 12.5631 21 12.5C21 10.567 19.433 9 17.5 9H15.9338C15.9752 8.6755 16 8.33974 16 8C16 6.98865 15.7788 5.80611 15.5539 4.85235C15.1401 3.09702 13.5428 2 11.8377 2H10.5Z" fill="red"/></svg>
               </div>
              :
-             <div className="border-r-2 bg-gray-800 p-1 rounded border-gray-800" onClick={() => handleFavorite(detailData)}>
+             <div className="border-r-2 bg-gray-800 p-1 rounded border-gray-800" onClick={() => handleFavorite(detailData, type)}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="Hawkins-Icon Hawkins-Icon-Standard"><path fill-Rule="evenodd" clip-rule="evenodd" d="M10.696 8.7732C10.8947 8.45534 11 8.08804 11 7.7132V4H11.8377C12.7152 4 13.4285 4.55292 13.6073 5.31126C13.8233 6.22758 14 7.22716 14 8C14 8.58478 13.8976 9.1919 13.7536 9.75039L13.4315 11H14.7219H17.5C18.3284 11 19 11.6716 19 12.5C19 12.5929 18.9917 12.6831 18.976 12.7699L18.8955 13.2149L19.1764 13.5692C19.3794 13.8252 19.5 14.1471 19.5 14.5C19.5 14.8529 19.3794 15.1748 19.1764 15.4308L18.8955 15.7851L18.976 16.2301C18.9917 16.317 19 16.4071 19 16.5C19 16.9901 18.766 17.4253 18.3994 17.7006L18 18.0006L18 18.5001C17.9999 19.3285 17.3284 20 16.5 20H14H13H12.6228C11.6554 20 10.6944 19.844 9.77673 19.5382L8.28366 19.0405C7.22457 18.6874 6.11617 18.5051 5 18.5001V13.7543L7.03558 13.1727C7.74927 12.9688 8.36203 12.5076 8.75542 11.8781L10.696 8.7732ZM10.5 2C9.67157 2 9 2.67157 9 3.5V7.7132L7.05942 10.8181C6.92829 11.0279 6.72404 11.1817 6.48614 11.2497L4.45056 11.8313C3.59195 12.0766 3 12.8613 3 13.7543V18.5468C3 19.6255 3.87447 20.5 4.95319 20.5C5.87021 20.5 6.78124 20.6478 7.65121 20.9378L9.14427 21.4355C10.2659 21.8094 11.4405 22 12.6228 22H13H14H16.5C18.2692 22 19.7319 20.6873 19.967 18.9827C20.6039 18.3496 21 17.4709 21 16.5C21 16.4369 20.9983 16.3742 20.995 16.3118C21.3153 15.783 21.5 15.1622 21.5 14.5C21.5 13.8378 21.3153 13.217 20.995 12.6883C20.9983 12.6258 21 12.5631 21 12.5C21 10.567 19.433 9 17.5 9H15.9338C15.9752 8.6755 16 8.33974 16 8C16 6.98865 15.7788 5.80611 15.5539 4.85235C15.1401 3.09702 13.5428 2 11.8377 2H10.5Z" fill="currentColor"/></svg>
               </div>}
               <p className="text-sm">Language : {detailData.spoken_languages[0].name}</p>
-              <button className="flex items-center gap-x-2 rounded-full border-red-700 border py-2 px-8 text-xs font-NetflixBold hover:bg-red-600 transition-all duration-200 ease" onClick={()=>handleModal(detailData.id)}>
+              <button className="flex items-center gap-x-2 rounded-full border-red-700 border py-2 px-8 text-xs font-NetflixBold hover:bg-red-600 transition-all duration-200 ease" onClick={()=>handleModal(detailData.id, type)}>
                 <svg width="8" height="11" viewBox="0 0 8 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.06248 10.3125C2.60067 10.7743 2.07227 10.8773 1.47727 10.6217C0.881299 10.3669 0.583313 9.91144 0.583313 9.25519V1.74478C0.583313 1.08853 0.881299 0.633043 1.47727 0.37832C2.07227 0.122626 2.60067 0.225681 3.06248 0.687487L6.85415 4.47915C6.99998 4.62499 7.10935 4.78297 7.18227 4.95311C7.25519 5.12325 7.29165 5.30554 7.29165 5.49999C7.29165 5.69443 7.25519 5.87672 7.18227 6.04686C7.10935 6.217 6.99998 6.37499 6.85415 6.52082L3.06248 10.3125Z" fill="white"/>
                 </svg>
@@ -120,11 +118,8 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
         </div>
         {/* casting */}
         < Casting cast={castData} />
-        
         {/* review */}
         {reviewsData.length !== 0 && < Reviews reviews={reviewsData} />} 
-
-        
         {/* similar */}
         <div className="">
         <div className="flex items-center gap-x-4 mb-6">
@@ -135,8 +130,6 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
       </div>
           < Similar similar={similarData} />
         </div>
-
-
       </div>
       { show && <Modal />}
     </section>
@@ -160,6 +153,6 @@ export async function getServerSideProps(context) {
   const [reviewsData, castData, similarData, detailData] = [reviews.results, cast.cast, similar.results, detail]
 
   return {
-    props: {reviewsData, castData, similarData, detailData}, // will be passed to the page component as props
+    props: {reviewsData, castData, similarData, detailData}
   }
 }

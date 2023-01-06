@@ -11,10 +11,9 @@ const FilmCard = ({film/* , handleModal */}) => {
   const type = (router.pathname === "/series") ? "tv" : "movie"
   const dispatch = useDispatch()
   const handleModal = (id, type) => { 
-    console.log("id est : ",id, "type est", type)
     dispatch(modalOpen({id, type}))
   }
-  
+
   return (
     <>
       <div className={`relative flex flex-col cursor-pointer transition duration-200 ease-out md:hover:scale-105 h-28 min-w-[180px] md:h-36 md:min-w-[260px]`} onClick={()=>handleModal(film.id, type)}>

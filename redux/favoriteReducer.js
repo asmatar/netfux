@@ -1,23 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  favorite: [],
+  favoriteMovies: [],
+  favoriteSeries: [],
 };
 const favoriteSlice = createSlice({
   name: 'favorite',
   initialState,
   reducers: {
-    addToMyList (state, action) {                
-        const isExist = state.favorite.find(item => item.id === action.payload.id)
+    addToMyList (state, action) {    
+      if (action.payload.type === "movie") {
+        state.favoriteSeries = state.favoriteSeries
+        const isExist = state.favoriteMovies.find(item => item.id === action.payload.id)
         if (!isExist) {
-            state.favorite.push(action.payload)
+          state.favoriteMovies.push(action.payload.movie)
         } else {            
         }
+      } else {
+        const isExist = state.favoriteSeries.find(item => item.id === action.payload.id)
+        if (!isExist) {
+          state.favoriteSeries.push(action.payload.movie)
+        } else {            
+        }
+      }          
     },
     removeFromMyList (state, action) {      
-      const isExist = state.favorite.find(item => item.id === action.payload)
-      if (isExist) {        
-        state.favorite = state.favorite.filter(item => item.id !== action.payload)
+      const isExistMovie = state.favoriteMovies.find(item => item.id === action.payload)
+      const isExistSerie = state.favoriteSeries.find(item => item.id === action.payload)
+      if (isExistMovie || isExistSerie) {        
+        state.favoriteMovies = state.favoriteMovies.filter(item => item.id !== action.payload)
+        state.favoriteSeries = state.favoriteSeries.filter(item => item.id !== action.payload)
       } else {        
       }
     }, 
