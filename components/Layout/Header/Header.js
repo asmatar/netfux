@@ -53,7 +53,10 @@ function Header() {
         {/* cta-search */}
         { pathname === "/login"
         ?
+        <>
+          {/* <button className='bg-[#e50914] text-white justify-center cursor-pointer text-center text:lg transition duration-200 ease px-4 py-1 rounded-sm hover:bg-[#f40612]'>Sign in</button> */}
           <button className='bg-[#e50914] text-white justify-center cursor-pointer text-center text:lg transition duration-200 ease px-4 py-1 rounded-sm hover:bg-[#f40612]'>Sign in</button>
+        </>
         :
           <div className="relative flex items-center gap-x-6">
             <div className="relative hidden small-tab:flex">
