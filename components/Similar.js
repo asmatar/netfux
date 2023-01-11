@@ -24,7 +24,7 @@ const Similar = ({similar}) => {
           <Image
               alt="similar movie image"
 
-              layout="fill"
+              fill
               className=""
               src={`https://image.tmdb.org/t/p/w500${film?.backdrop_path || film?.poster_path }`}
           />
@@ -36,7 +36,7 @@ const Similar = ({similar}) => {
             <div className="relative h-[10vw] w-[16vw] overflow-hidden rounded">
               <Image
                 alt="similar movie image"
-                layout="fill"
+                fill
                 className=""
                 src={`https://image.tmdb.org/t/p/w500${film?.backdrop_path || film?.poster_path }`}
               />
@@ -92,7 +92,7 @@ const Similar = ({similar}) => {
             <div className="flex-col flex relative h-[8vw] w-[13vw] overflow-hidden rounded">
               <Image
                 alt="similar movie image"
-                layout="fill"
+                fill
                 className=""
                 src="/public/test.png"         
                 src={`https://image.tmdb.org/t/p/w500${film?.backdrop_path || film?.poster_path }`}

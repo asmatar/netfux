@@ -18,7 +18,7 @@ const CastModal = ({handleCloseCardModal, id}) => {
     <div className="fixed top-0 left-0 w-full h-full right-0 bottom-0 outline-none overflow-x-hidden overflow-y-auto bg-black/60 z-50 flex items-center justify-center animate-fade">
         <div className="bg-[#181818] relative">
             <div classNameName="rounded-full bg-black p-2 w-min absolute top-3 right-3 cursor-pointer" onClick={handleCloseCardModal}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="Hawkins-Icon Hawkins-Icon-Standard"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z" fill="currentColor"></path></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="Hawkins-Icon Hawkins-Icon-Standard"><path fillRule="evenodd" clipRule="evenodd" d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z" fill="currentColor"></path></svg>
             </div>
             <div className="flex h-full">
                 <div className="h-full w-[375px]">

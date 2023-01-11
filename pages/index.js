@@ -4,15 +4,12 @@ import Banner from '../components/Banner';
 import Row from '../components/Row';
 import {request} from "../utils/request"
 import { wrapper } from '../redux/store';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {auth} from "../firebase"
 
 import { getNetflixOriginalsFilm, getTrendingFilm, getTopRatedFilm, getHistoryFilm, getScienceFictionFilm, getActionFilm, getDocumentariesFilm, getAnimationFilm, getAdventureFilm, getRomanceFilm, getComedyFilm, getHorrorFilm, getFantasyFilm, getCrimeFilm, getDramaFilm, getFamilyFilm } from '../redux/filmReducer';
-import { onAuthStateChanged } from 'firebase/auth';
 const Modal = dynamic(() => import('../components/Modal'), {
   ssr: false,
 })
@@ -24,18 +21,7 @@ export default function Home() {
   const filteredMovie = useSelector(state => state.films.filteredMovie)
   const activeSearch = useSelector(state => state.films.activeSearch)
 
-   const user = auth.currentUser;
-   console.log(user)
-  useEffect(() => {
-    const unsubcribe = onAuthStateChanged(auth, userAuth =>{
-      if(userAuth) {
-        console.log(userAuth)
-      } else {
-  
-      }
-    })
-    return unsubcribe;
-  }, [])
+
   
   return (
     <div>
