@@ -1,10 +1,11 @@
 import Head from 'next/head';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import {auth} from "../../firebase"
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth"
 import { useRouter } from 'next/router';
-
+import AuthContext from '../../context/authContext';
+import { useAuth } from '../../context/authContext';
 const Login = () => {
 
   const router = useRouter()
@@ -12,34 +13,63 @@ const Login = () => {
   const [password, setPasswordRef] = useState("")
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [signinQuery, setSigninQuery] = useState(false)
-  const register = (event) => {
+  const user = auth.currentUser;
+  //const authCtx = useContext(AuthContext);
+  /*console.log(authCtx.signUp)
+   const register = (event) => {
     event.preventDefault()
     createUserWithEmailAndPassword(auth,
       email, 
       password
     ).then((userCredential)=>{
       const user = userCredential.user;
-      console.log("user in register",user)
     }).catch((error)=>{
       console.log(error.message)
     })
+  } */
+  const { signUp, login } = useAuth()
+  async function handleSignUp(event) {
+    event.preventDefault()
+    console.log("in handle sign up")
+
+    await signUp(email, password)
+    .then((userCredential)=>{
+      console.log("userCredential", userCredential)
+    }) 
+    .catch(err => console.log(err) )
+
   }
+  async function handleLogin(event) {
+    event.preventDefault()
+    console.log("in handle login")
+
+    await login(email, password)
+    .then((userCredential)=>{
+      console.log("userCredential", userCredential)
+    }) 
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage)
+      console.log(errorCode)
+    });
+
+  }
+
   useEffect(() => {
-    console.log("in use effect",router.query.signinQuery)
-    console.log("in use effect state query",signinQuery)
     setSigninQuery(router.query.signinQuery)
-    
-  }, [router.query.signinQuery]) 
-  console.log("in use effect state query",signinQuery)
+    //user !== null && router.push("/")
+    return
+  }, [signinQuery, router.query.signinQuery, user, router])
   
-  const signin = (event) => {
+/*   const signin = (event) => {
     event.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
       console.log("user in sign in", user)
-      router.push("/")
+      //router.push("/")
       // ...
     })
     .catch((error) => {
@@ -48,7 +78,8 @@ const Login = () => {
       console.log(errorMessage)
       console.log(errorCode)
     });
-  }
+  } */
+  
   return (
  <>
     <Head>
@@ -117,7 +148,7 @@ const Login = () => {
           className="w-full rounded bg-[#E50914] py-3 font-semibold"
           //onClick={() => setLogin(true)}
           type="submit"
-          onClick={signin}
+          onClick={handleLogin}
           >
           Sign In
         </button>
@@ -126,7 +157,7 @@ const Login = () => {
           New to Netflix?
           <button
             className="cursor-pointer text-white hover:underline pl-2"
-            onClick={(event)=>register(event)}
+            onClick={handleSignUp}
             type="submit"
             >
             Sign up now

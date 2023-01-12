@@ -11,15 +11,16 @@ import {searchSeriesByName} from "../../../redux/serieReducer"
 //import { signOut } from 'firebase/auth';
 //import { signOut } from "firebase/auth";
 import {auth} from "../../../firebase"
-import { signOut } from 'firebase/auth';
+//import { signOut } from 'firebase/auth';
+import { useAuth } from '../../../context/authContext';
 
 function Header() {
 
   const router = useRouter()
   const [search, setSearch] = useState("")
   const {pathname} = useRouter()
-  const user = auth.currentUser;
-  console.log(pathname)
+  //const user = auth.currentUser;
+  //console.log(pathname)
   const [isScroll, setIsScroll] = useState(false);
   const dispatch = useDispatch()
   const handleScroll = () => {
@@ -35,7 +36,28 @@ function Header() {
     :
     dispatch(searchByName(event.target.value), setSearch(()=> event.target.value))
   }
-  const handleSignOut = () => {
+  
+  const {logout} = useAuth()
+  async function handleSignOut(event) {
+    event.preventDefault()
+   console.log("in handle sign out headersign out")
+     /*console.log("curent user", user) */
+     await logout(auth).then(() => {
+      // Sign-out successful.
+     console.log("curent user in sign out") 
+     router.push("/login")
+
+    }).catch((error) => {
+      // An error happened.
+     console.log("curent user")
+     console.log("curent user", error)
+
+    });
+    
+     /* console.log("curent user in sign out after log out", user) */
+
+  }
+/*   const handleSignOut = () => {
     console.log("sign out")
      console.log("curent user", user)
      signOut(auth).then(() => {
@@ -52,7 +74,7 @@ function Header() {
     
      console.log("curent user in sign out after log out", user)
 
-  }
+  } */
  
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -111,7 +133,7 @@ function Header() {
               </div>
               {/* sign out modal */}
               <div className="opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 absolute top-14 right-0 w-52"
-                     onClick={()=>handleSignOut()}
+                     onClick={handleSignOut}
 
              >
                 <div className="absolute -top-5 right-0">
