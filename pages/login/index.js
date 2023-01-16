@@ -6,79 +6,74 @@ import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "fireba
 import { useRouter } from 'next/router';
 import AuthContext from '../../context/authContext';
 import { useAuth } from '../../context/authContext';
-const Login = () => {
+import { useForm } from "react-hook-form";
 
+
+const Login = () => {
+  
   const router = useRouter()
+  const [log, setLog] = useState(false)
   const [email, setEmailRef] = useState("")
   const [password, setPasswordRef] = useState("")
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [signinQuery, setSigninQuery] = useState(false)
+  const [firebaseErrorLogin, setFirebaseErrorLogin] = useState("")
+  const [firebaseErrorSignup, setFirebaseErrorSignup] = useState("")
   const user = auth.currentUser;
-  //const authCtx = useContext(AuthContext);
-  /*console.log(authCtx.signUp)
-   const register = (event) => {
-    event.preventDefault()
-    createUserWithEmailAndPassword(auth,
-      email, 
-      password
-    ).then((userCredential)=>{
-      const user = userCredential.user;
-    }).catch((error)=>{
-      console.log(error.message)
-    })
-  } */
+
   const { signUp, login } = useAuth()
-  async function handleSignUp(event) {
-    event.preventDefault()
+
+
+  const onSubmit = async(data) => {
+    console.log("data", data)
+   //event.preventDefault()
+    if (log) {
+      setFirebaseErrorSignup("")
+      //handleLogin(data.email, data.password)
+      console.log("in handle login")
+      
+      await login(data.email, data.password)
+      .then((userCredential)=>{
+        console.log("userCredential", userCredential)
+        router.push("/")
+      }) 
+      .catch((error) => {
+        setFirebaseErrorLogin("")
+        setFirebaseErrorSignup(error.code)
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error)
+        console.log(errorMessage)
+        console.log(errorCode)
+      });
+    } else {
+      //handleSignUp(data.email, data.password)
+      //event.preventDefault()
+      await signUp(data.email, data.password)
+      .then((userCredential)=>{
+        console.log("userCredential", userCredential)
+        router.push("/")
+      }) 
+      .catch(err => setFirebaseErrorSignup(err.code))
+    }
+  }
+/*   async function handleSignUp(event) {
     console.log("in handle sign up")
 
-    await signUp(email, password)
-    .then((userCredential)=>{
-      console.log("userCredential", userCredential)
-    }) 
-    .catch(err => console.log(err) )
-
+    
   }
   async function handleLogin(event) {
-    event.preventDefault()
-    console.log("in handle login")
-
-    await login(email, password)
-    .then((userCredential)=>{
-      console.log("userCredential", userCredential)
-    }) 
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage)
-      console.log(errorCode)
-    });
-
-  }
+    
+  } */
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  console.log(watch()); // watch input value by passing the name of it
 
   useEffect(() => {
+    user !== null && router.push("/")
     setSigninQuery(router.query.signinQuery)
-    //user !== null && router.push("/")
     return
   }, [signinQuery, router.query.signinQuery, user, router])
-  
-/*   const signin = (event) => {
-    event.preventDefault()
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log("user in sign in", user)
-      //router.push("/")
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage)
-      console.log(errorCode)
-    });
-  } */
+
   
   return (
  <>
@@ -121,6 +116,7 @@ const Login = () => {
         (showLoginForm || signinQuery === "true") &&
         <form
         className="relative mt-24 space-y-8 rounded bg-black/75 py-10 px-6 md:mt-0 md:max-w-md md:px-14"
+        onSubmit={handleSubmit(onSubmit)}
         >
         <h1 className="text-4xl font-semibold">Sign In</h1>
         <div className="space-y-4">
@@ -130,34 +126,71 @@ const Login = () => {
               placeholder="Email"
               className="input"
               value={email}
-              onChange={(event)=>setEmailRef(event.target.value)}
+              {...register("email", { required: "this field is required", 
+                                      minLength: { value: 7, message: "the email must have 7 caracters"},
+                                      maxLength: { value: 20, message: "the email souldn't have more than 20 caracters"},
+                                      onChange:(event)=>setEmailRef(event.target.value)
+                                    }
+                          )}              
             />
-              
+              { errors.email && (
+              <p className="text-sm  text-orange-500">
+                {errors.email.message}
+              </p>
+            )}
           </label>
           <label className="inline-block w-full">
             <input
               type="password"
               placeholder="Password"
               className="input"
-              onChange={(event)=>setPasswordRef(event.target.value)}
-              />
-            
+              {...register("password", { required: "this field is required", 
+              minLength: { value: 7, message: "password must have 7 caracters"},
+              maxLength: { value: 15, message: "password shouldn't have more than 15 caracters"},
+              onChange:(event)=>setPasswordRef(event.target.value)
+            }
+            )}      
+            />
+
+        {errors.password && (
+              <p className="text-sm  text-orange-500">
+                {errors.password.message}
+              </p>
+            )}
           </label>
         </div>
         <button
           className="w-full rounded bg-[#E50914] py-3 font-semibold"
           //onClick={() => setLogin(true)}
           type="submit"
-          onClick={handleLogin}
+          onClick={() => setLog(true)}
+          /* onClick={handleLogin} */
           >
           Sign In
         </button>
+            {firebaseErrorLogin !== "" && 
+            (
+              <p className="text-sm  text-orange-500">
+                {firebaseErrorLogin}
+              </p>
+            )
+            }
+          {firebaseErrorSignup !== "" && 
+            (
+              <p className="text-sm  text-orange-500 text-center">
+                {firebaseErrorSignup}
+              </p>
+            )
+            }
         <div 
         className="text-[gray]">
           New to Netflix?
           <button
             className="cursor-pointer text-white hover:underline pl-2"
-            onClick={handleSignUp}
+            /* onSubmit={handleSubmit(handleSignUp)} */
+            onClick={() => setLog(false)}
+
+            /* onClick={handleSignUp} */
             type="submit"
             >
             Sign up now

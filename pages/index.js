@@ -21,6 +21,8 @@ export default function Home() {
   const filteredMovie = useSelector(state => state.films.filteredMovie)
   const activeSearch = useSelector(state => state.films.activeSearch)
 
+/*   const stateR = useSelector(state=> state.favorite.favoriteMovies)
+  console.log(stateR) */
 
   
   return (
