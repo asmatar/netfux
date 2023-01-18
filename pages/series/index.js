@@ -61,7 +61,7 @@ export default function Series() {
     </div>
   );
 }
-export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
+export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({req}) => {
   
   const [fetchAnimation, fetchComedy, fetchCrime, fetchDocumentaries, fetchDrama, fetchFamily, fetchKids, fetchMystery, fetchNews, fetchReality, fetchTalk, fetchTopRated] = await Promise.all([
     fetch(tvRequest.fetchAnimation), fetch(tvRequest.fetchComedy), fetch(tvRequest.fetchCrime), fetch(tvRequest.fetchDocumentaries), fetch(tvRequest.fetchDrama), fetch(tvRequest.fetchFamily), fetch(tvRequest.fetchKids), fetch(tvRequest.fetchMystery), fetch(tvRequest.fetchNews), fetch(tvRequest.fetchReality), fetch(tvRequest.fetchTalk), fetch(tvRequest.fetchTopRated)
@@ -83,6 +83,21 @@ export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
   wrapper.dispatch(getTalkTv(talk.results))
   wrapper.dispatch(getTopRatedTv(topRated.results))
  
+
+  let ctx = req.cookies.user
+
+  
+  
+
+  if (ctx === "false") {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    }
+  }  
+
   return {
     props: {
     }

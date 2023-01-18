@@ -55,7 +55,8 @@ export default List;
 export function getServerSideProps  ({req})  {
 
   let ctx = req.cookies.user
-  console.log(ctx)
+  console.log("*****************************************************")
+  console.log(req)
    if (ctx === "false") {
     return {
       redirect: {

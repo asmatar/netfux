@@ -68,7 +68,7 @@ export default function Home() {
     </div>
   );
 }
-export const getStaticProps = wrapper.getStaticProps(wrapper => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({req}) => {
   
   const [fetchActionMovies , fetchAdventureMovies, fetchAnimationMovies,fetchCrimeMovies,fetchComedyMovies,fetchDocumentariesMovies, fetchDramaMovies,fetchFamilyMovies,  fetchFantasyMovies, fetchHistoryMovies, fetchHorrorMovies, fetchNetflixOriginalsMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchTopRatedMovies, fetchTrendingMovies ] = await Promise.all([
     fetch(request.fetchAction) , fetch(request.fetchAdventure), fetch(request.fetchAnimation), fetch(request.fetchCrime), fetch(request.fetchComedy), fetch(request.fetchDocumentaries), fetch(request.fetchDrama), fetch(request.fetchFamily), fetch(request.fetchFantasy), fetch(request.fetchHistory), fetch(request.fetchHorror), fetch(request.fetchNetflixOriginals), fetch(request.fetchRomance), fetch(request.fetchScienceFiction), fetch(request.fetchTopRated), fetch(request.fetchTrending) 
@@ -95,7 +95,23 @@ export const getStaticProps = wrapper.getStaticProps(wrapper => async (context) 
 
 
 
+  let ctx = req.cookies.user
+
+
   
+
+  if (ctx === "false") {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    }
+  }  
+
+  return {
+    props: {}
+  }
 
   // revalidation : 10 sec => refetch after 10sec
   // not Found => true or false, if true => render 404 page, il fail to fetch data
