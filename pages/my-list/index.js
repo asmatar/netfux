@@ -51,3 +51,19 @@ function List() {
 }
 
 export default List;
+
+export function getServerSideProps  ({req})  {
+
+  let ctx = req.cookies.user
+  console.log(ctx)
+   if (ctx === "false") {
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    }
+  } 
+  return {
+    props: {}
+  }
+}

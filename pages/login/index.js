@@ -69,7 +69,6 @@ const Login = () => {
   console.log(watch()); // watch input value by passing the name of it
 
   useEffect(() => {
-    user !== null && router.push("/")
     setSigninQuery(router.query.signinQuery)
     return
   }, [signinQuery, router.query.signinQuery, user, router])
@@ -207,3 +206,19 @@ const Login = () => {
 };
 
 export default Login;
+
+export function getServerSideProps  ({req})  {
+
+  let ctx = req.cookies.user
+  console.log(ctx)
+   if (ctx === "true") {
+    return {
+      redirect: {
+        destination: "/",
+      },
+    }
+  } 
+  return {
+    props: {}
+  }
+}

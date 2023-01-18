@@ -43,14 +43,14 @@ const Modal = () => {
     })
     )
   }
-  const sameMovie = favoriteMovies.find(item => item.id === movie.id)
-  const sameSerie = favoriteSeries.find(item => item.id === movie.id)
+
+  const sameMovie = favoriteMovies.find(item => item.id === movie?.id)
+  const sameSerie = favoriteSeries.find(item => item.id === movie?.id)
   
 
   let url = `https://api.themoviedb.org/3/${filmOrMovie}/${currentFilmId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&append_to_response=videos`
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const {data, error} = useSWR(url, fetcher)
-
   useEffect(()=>{
     setMovie(data)
     if (data?.videos) {
