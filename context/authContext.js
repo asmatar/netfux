@@ -16,8 +16,7 @@ export function useAuth() {
     return useContext(AuthContext)
 }
 export const AuthContextProvider = ({children}) => {
-/*     const favMovies = useSelector(state => state.favorite.favoriteMovies)
-    const favSeries = useSelector(state => state.favorite.favoriteSeries) */
+
     const router = useRouter()
     const [user, setCurrentUser] = useState()
     const [isLoggedIn, setIsLoggedIn] = useState()

@@ -8,22 +8,34 @@ import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 import { getNetflixOriginalsFilm, getTrendingFilm, getTopRatedFilm, getHistoryFilm, getScienceFictionFilm, getActionFilm, getDocumentariesFilm, getAnimationFilm, getAdventureFilm, getRomanceFilm, getComedyFilm, getHorrorFilm, getFantasyFilm, getCrimeFilm, getDramaFilm, getFamilyFilm } from '../redux/filmReducer';
+import { useState } from 'react';
 const Modal = dynamic(() => import('../components/Modal'), {
   ssr: false,
 })
-export default function Home() {
+
+export default function Home({favMovies}) {
 
   const { netflixOriginals, trending, topRated, history, scienceFiction, action, documentaries, animation, adventure, romance, comedy, horror, crime, drama, fantasy, family } = useSelector((state) => state.films)
   const {show} = useSelector(state => state.modal)
-  const {favoriteMovies} = useSelector(state => state.favorite)
+  const {favoriteMovies} = useSelector(state => state.favorite) || favMovies
   const filteredMovie = useSelector(state => state.films.filteredMovie)
   const activeSearch = useSelector(state => state.films.activeSearch)
+  const [resCookie, setResCookie] = useState()
+  console.log("res cookie ", resCookie)
+  const stringifyFavorite = JSON.stringify(favoriteMovies.slice(0, 300))
+  console.log("stringifyFavorite", stringifyFavorite)
+  console.log("cookies favorite", favMovies)
+  useEffect(()=>{
+    Cookies.set("favMovies", stringifyFavorite.slice(0, 2000))
+  }, [stringifyFavorite])
 
-/*   const stateR = useSelector(state=> state.favorite.favoriteMovies)
-  console.log(stateR) */
-
+/*   useEffect(()=>{
+    Cookies.get("favMovies", stringifyFavorite)
+    setResCookie(Cookies.get("favMovies"))
+  }, [stringifyFavorite]) */
   
   return (
     <div>
@@ -97,8 +109,8 @@ export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({
 
   let ctx = req.cookies.user
 
-
-  
+  let favMovies = req.cookies.favMovies
+  console.log("favvv", favMovies)
 
   if (ctx === "false") {
     return {
@@ -110,7 +122,7 @@ export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({
   }  
 
   return {
-    props: {}
+    props: {favMovies}
   }
 
   // revalidation : 10 sec => refetch after 10sec
