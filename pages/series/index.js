@@ -14,19 +14,14 @@ const Modal = dynamic(() => import('../../components/Modal'), {
   ssr: false,
 })
 export default function Series() {
-/*   const [showModal, setShowModal] = useState(false)
-  const [currentFilmId, setCurrentFilm] = useState(null) */
 
-  /* const handleModal = (currentFilmId) => {
-  setCurrentFilm(currentFilmId)
-   setShowModal(true)
- }  */
-  const { animation, comedy, crime, documentaries, drama, family, kids, mystery, news, reality, talk, topRated } = useSelector((state) => state.serie)
+  const { animation, comedy, crime, documentaries, drama, family, kids, mystery, news, reality, talk } = useSelector((state) => state.serie)
   const {show} = useSelector(state => state.modal)
   const {favoriteSeries} = useSelector(state => state.favorite)
-  const filteredMovie = useSelector(state => state.films.filteredMovie)
-  const activeSearch = useSelector(state => state.films.activeSearch)
-  console.log("filteredFilm")
+  const filteredSeries = useSelector(state => state.serie.filteredSeries)
+  console.log("filter series", filteredSeries)
+  const activeSearch = useSelector(state => state.serie.activeSearch)
+
   return (
     <div>
      
@@ -39,7 +34,7 @@ export default function Series() {
         <Banner />
         <section className="flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12">
         <ToastContainer />
-          { filteredMovie.length <1 && activeSearch === false ? (
+          { filteredSeries.length <1 && activeSearch === false ? (
           <>
           <Row CategoryTitle={"Animation"} filmsCategory={animation}/>
           { favoriteSeries.length >0  && <Row CategoryTitle={"My list"} filmsCategory={favoriteSeries}  />}
@@ -55,10 +50,10 @@ export default function Series() {
           <Row CategoryTitle={"Talk"} filmsCategory={talk}/>
           </>)
           :
-          (filteredMovie.length <1 && activeSearch === true) ?
+          (filteredSeries.length <1 && activeSearch === true) ?
           <p className='py-20 font-NetflixBold text-red-700 text-4xl'>There is no movie that match with your search</p>
           : 
-          <Row CategoryTitle={"Your Movies results"} filmsCategory={filteredMovie}/>
+          <Row CategoryTitle={"Your Movies results"} filmsCategory={filteredSeries}/>
         }
         </section>
       </main>
@@ -66,7 +61,7 @@ export default function Series() {
     </div>
   );
 }
-export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
+export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({req}) => {
   
   const [fetchAnimation, fetchComedy, fetchCrime, fetchDocumentaries, fetchDrama, fetchFamily, fetchKids, fetchMystery, fetchNews, fetchReality, fetchTalk, fetchTopRated] = await Promise.all([
     fetch(tvRequest.fetchAnimation), fetch(tvRequest.fetchComedy), fetch(tvRequest.fetchCrime), fetch(tvRequest.fetchDocumentaries), fetch(tvRequest.fetchDrama), fetch(tvRequest.fetchFamily), fetch(tvRequest.fetchKids), fetch(tvRequest.fetchMystery), fetch(tvRequest.fetchNews), fetch(tvRequest.fetchReality), fetch(tvRequest.fetchTalk), fetch(tvRequest.fetchTopRated)
@@ -88,6 +83,21 @@ export const getStaticProps = wrapper.getStaticProps(wrapper => async () => {
   wrapper.dispatch(getTalkTv(talk.results))
   wrapper.dispatch(getTopRatedTv(topRated.results))
  
+
+  let ctx = req.cookies.user
+
+  
+  
+
+  if (ctx === "false") {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    }
+  }  
+
   return {
     props: {
     }

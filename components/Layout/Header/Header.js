@@ -7,9 +7,20 @@ import Button from '../../UI/Button';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import {searchByName} from "../../../redux/filmReducer"
+import {searchSeriesByName} from "../../../redux/serieReducer"
+//import { signOut } from 'firebase/auth';
+//import { signOut } from "firebase/auth";
+import {auth} from "../../../firebase"
+//import { signOut } from 'firebase/auth';
+import { useAuth } from '../../../context/authContext';
+
 function Header() {
+
+  const router = useRouter()
   const [search, setSearch] = useState("")
   const {pathname} = useRouter()
+  //const user = auth.currentUser;
+  //console.log(pathname)
   const [isScroll, setIsScroll] = useState(false);
   const dispatch = useDispatch()
   const handleScroll = () => {
@@ -20,9 +31,51 @@ function Header() {
     }
   };
   const handleSearchName = (event) => {
+    pathname.includes("series") ?
+    dispatch(searchSeriesByName(event.target.value), setSearch(()=> event.target.value))
+    :
     dispatch(searchByName(event.target.value), setSearch(()=> event.target.value))
   }
+  
+  const {logout} = useAuth()
+  async function handleSignOut(event) {
+    event.preventDefault()
+   console.log("in handle sign out headersign out")
+     /*console.log("curent user", user) */
+     await logout(auth).then(() => {
+      // Sign-out successful.
+     console.log("curent user in sign out") 
+     router.push("/login")
 
+    }).catch((error) => {
+      // An error happened.
+     console.log("curent user")
+     console.log("curent user", error)
+
+    });
+    
+     /* console.log("curent user in sign out after log out", user) */
+
+  }
+/*   const handleSignOut = () => {
+    console.log("sign out")
+     console.log("curent user", user)
+     signOut(auth).then(() => {
+      // Sign-out successful.
+     console.log("curent user in sign out", user)
+     router.push("/login")
+
+    }).catch((error) => {
+      // An error happened.
+     console.log("curent user", user)
+     console.log("curent user", error)
+
+    });
+    
+     console.log("curent user in sign out after log out", user)
+
+  } */
+ 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -31,7 +84,8 @@ function Header() {
   }, []);
 
   return (
-    <header className={`bg-gradient-to-b from-black/30 to-transparent ${isScroll && 'bg-[#141414]'} transition-all duration-300`}>
+    <header 
+    className={`bg-gradient-to-b from-black/30 to-transparent ${isScroll && 'bg-[#141414]'} transition-all duration-300`}>
       <div className="flex justify-between w-full items-center">
         <div className="flex items-center gap-x-2 sm:gap-x-6">
           <Link href="/">
@@ -48,7 +102,14 @@ function Header() {
         {/* cta-search */}
         { pathname === "/login"
         ?
-          <button className='bg-[#e50914] text-white justify-center cursor-pointer text-center text:lg transition duration-200 ease px-4 py-1 rounded-sm hover:bg-[#f40612]'>Sign in</button>
+        <>
+          {/* <button className='bg-[#e50914] text-white justify-center cursor-pointer text-center text:lg transition duration-200 ease px-4 py-1 rounded-sm hover:bg-[#f40612]'>Sign in</button> */}
+          <Link  href={{
+            pathname: '/login',
+            query: { signinQuery: true },
+          }} 
+          className='bg-[#e50914] text-white justify-center cursor-pointer text-center text:lg transition duration-200 ease px-4 py-1 rounded-sm hover:bg-[#f40612]'>Sign in</Link>
+        </>
         :
           <div className="relative flex items-center gap-x-6">
             <div className="relative hidden small-tab:flex">
@@ -71,14 +132,18 @@ function Header() {
                 </svg>
               </div>
               {/* sign out modal */}
-              <div className="opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 absolute top-14 right-0 w-52">
+              <div className="opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 absolute top-14 right-0 w-52"
+                     onClick={handleSignOut}
+
+             >
                 <div className="absolute -top-5 right-0">
                   <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.5 14.5833L23.3334 20.4167H11.6667L17.5 14.5833Z" fill="white" />
                   </svg>
                 </div>
-                <Button className="bg-black/70 border border-gray-500/30 py-4 flex justify-center transition-all duration-300 hover:bg-[#141414] w-full ">
-                  <span>sign out of Netflix</span>
+                <Button 
+                  className="bg-black/70 border border-gray-500/30 py-4 flex justify-center transition-all duration-300 hover:bg-[#141414] w-full ">
+                  sign out of Netflix
                 </Button>
               </div>
             </div>

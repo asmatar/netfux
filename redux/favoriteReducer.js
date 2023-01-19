@@ -1,9 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+/* let favMovies;
+let favSeries;
+const getFromLocalStorage = (key) => {
+  if (!key || typeof window === 'undefined') {
+      return ""
+  }
+  return localStorage.getItem(key)
+} */
+/* if (typeof window !== 'undefined') {
+  // Perform localStorage action
+   favMovies = getFromLocalStorage() ? JSON.parse(localStorage.getItem('movieList') : [])
+   favSeries = JSON.parse(localStorage.getItem('serieList'))
+} */
+/* const initialState = { 
+  favoriteMovies: getFromLocalStorage("movieList") ? JSON.parse(getFromLocalStorage("movieList") || '{}') : [],
+  favoriteSeries: getFromLocalStorage("serieList") ? JSON.parse(getFromLocalStorage("serieList") || '{}') : []
+}; */
 const initialState = {
-  favoriteMovies: [],
-  favoriteSeries: [],
-};
+  favoriteMovies: /* favMovies || */ /* (typeof window !== "undefined" && window.localStorage.getItem('movieList')) ? JSON.parse(window.localStorage.getItem('movieList')) : */ [],
+  favoriteSeries: /*f avSeries || */ [],
+}; 
 const favoriteSlice = createSlice({
   name: 'favorite',
   initialState,

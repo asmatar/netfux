@@ -23,7 +23,7 @@ const FilmCard = ({film/* , handleModal */}) => {
             film?.backdrop_path || film?.poster_path
           }`}
           className="rounded-sm object-cover md:rounded"
-          layout="fill"
+          fill
           alt="film card image"
         />
         <div className="absolute flex flex-col items-start justify-end gap-y-2 h-full bottom-0 left-0 w-full bg-black/40 text-xs hover:opacity-100 hover:visible visible opacity-0 transition duration-200 ease">
