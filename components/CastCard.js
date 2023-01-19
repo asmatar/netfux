@@ -11,7 +11,7 @@ console.log("cast card", id, name)
               alt="caracter picture"
               /*  width={200}
               height={200} */
-              layout="fill"
+              fill
               className=""
               src={existPicture}/* {`https://image.tmdb.org/t/p/original${picture}`}  */
           />
