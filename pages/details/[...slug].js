@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
-import { modalOpen, modalClose } from '../../redux/modalReducer'
+import { modalOpen } from '../../redux/modalReducer'
 import dynamic from 'next/dynamic'
 import { useSelector } from 'react-redux';
 import Casting from '../../components/Casting'
@@ -11,19 +11,21 @@ import { useRouter } from 'next/router'
 import { addToMyList, removeFromMyList } from '../../redux/favoriteReducer'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const Modal = dynamic(() => import('../../components/Modal'), {
-  ssr: false,
-})
+const Modal = dynamic(() => import('../../components/Modal'), {ssr: false,})
+
 const Detail = ({reviewsData, castData, similarData, detailData}) => {
-  console.log(castData)
+
   const router = useRouter()
   const dispatch = useDispatch()
   const type = (router.pathname === "/series" || router.query.slug[0] === "tv") ? "tv" : "movie"
   const CurrentFavoriteMovie = useSelector(state => state.favorite.favoriteMovies)
   const CurrentFavoriteSerie = useSelector(state => state.favorite.favoriteSeries)
-  let CurrentFavorite = type === "movie" ? CurrentFavoriteMovie : CurrentFavoriteSerie
   const [favorite, setFavorite] = useState(false)
+  let CurrentFavorite = type === "movie" ? CurrentFavoriteMovie : CurrentFavoriteSerie
   const path = `https://image.tmdb.org/t/p/original${detailData?.backdrop_path || detailData?.poster_path}`
+  const {show} = useSelector(state => state.modal)
+  const favoriteCurrentId = CurrentFavorite.find(fav => fav.id === +router.query.slug[1])
+
   const handleModal = (id, type) => {
     dispatch(modalOpen({id, type}))
   } 
@@ -57,15 +59,11 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
      })
      )
    }
-  const {show} = useSelector(state => state.modal)
-  const favoriteCurrentId = CurrentFavorite.find(fav => fav.id === +router.query.slug[1])
  
   return (
    <section className="bg-cover flex w-full justify-center bg-center"
     style={{backgroundImage:`linear-gradient(to bottom, rgba(0,0,0, .8) 0%, rgba(0,0,0, .8) 100%), url(${path})`}}>
      <ToastContainer />
-
-      {/* detail */}
       <div className="max-w-[1360px] w-full px-4 lg:px-10 flex flex-col gap-y-28">
         <div className="flex lg:flex-row flex-col gap-6 pt-28">
           <div className="">
@@ -116,11 +114,8 @@ const Detail = ({reviewsData, castData, similarData, detailData}) => {
             </div>
           </div>
         </div>
-        {/* casting */}
         < Casting cast={castData} />
-        {/* review */}
         {reviewsData.length !== 0 && < Reviews reviews={reviewsData} />  } 
-        {/* similar */}
         <div className="">
         <div className="flex items-center gap-x-4 mb-6">
         <svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">

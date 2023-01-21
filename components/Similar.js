@@ -1,8 +1,5 @@
-import Image from 'next/image'
 import React from 'react'
 import Films from './Films';
-
-
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -10,52 +7,19 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-
 // import required modules
 import { Navigation } from "swiper";
 
-
-
 const Similar = ({similar}) => {
-    const displayFilm = similar.map(film => (
-      <>
- {/*      <div className="flex flex-col gap-y-2 hover:scale-105 transition-all duration-200 ease" >
-        <div className="flex-col flex relative h-[8vw] w-[13vw] overflow-hidden rounded">
-          <Image
-              alt="similar movie image"
 
-              fill
-              className=""
-              src={`https://image.tmdb.org/t/p/w500${film?.backdrop_path || film?.poster_path }`}
-          />
-        </div>
-        <p className="text-center text-sm">{film.title}</p>
-      </div> */}
-        <SwiperSlide className='w-full !h-[200px] flex flex-col gap-y-2' key={film.id}>
-{/*           <div className="flex flex-col gap-y-2 hover:scale-105 transition-all duration-200 ease" >
-            <div className="relative h-[10vw] w-[16vw] overflow-hidden rounded">
-              <Image
-                alt="similar movie image"
-                fill
-                className=""
-                src={`https://image.tmdb.org/t/p/w500${film?.backdrop_path || film?.poster_path }`}
-              />
-            </div>
-          </div>
-          <p className="text-center text-sm">{film.title}</p> */}
-          
-            <Films films={film}/>
-          
-        </SwiperSlide>
-       
-      </>
-    ))
+  const displayFilm = similar.map(film => (
+    <SwiperSlide className='w-full !h-[200px] flex flex-col gap-y-2' key={film.id}>
+      <Films films={film}/>
+    </SwiperSlide>
+  ))
+
   return (
     <>
-{/*      <div className="w-48">
-      <div className="flex gap-x-4"> */}
-    
-      
       <Swiper
         slidesPerView={1}
         spaceBetween={20}
@@ -84,31 +48,8 @@ const Similar = ({similar}) => {
           },
         }}
         >
-     {displayFilm}
-{/*         <SwiperSlide className='w-full h-[200px]'>Slide 1</SwiperSlide>
-
-        <SwiperSlide className='w-full h-[200px]'>
-          <div className="flex flex-col gap-y-2 hover:scale-105 transition-all duration-200 ease" >
-            <div className="flex-col flex relative h-[8vw] w-[13vw] overflow-hidden rounded">
-              <Image
-                alt="similar movie image"
-                fill
-                className=""
-                src="/public/test.png"         
-                src={`https://image.tmdb.org/t/p/w500${film?.backdrop_path || film?.poster_path }`}
-              /> 
-              <img src="/test.png" alt="" />
-            </div>
-            <p className="text-center text-sm">arthur {film.title} </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide> */}
+        { displayFilm}
       </Swiper>
-{/*         {displayFilm}
-      </div>
-    </div> */}
     </>
   )
 }

@@ -7,7 +7,6 @@ const Nav = () => {
   const router = useRouter()
 
   return (
-    
     <nav className="flex flex-col relative group transition-all duration-200">
         <div className="flex items-center sm:hidden gap-x-1 cursor-pointer">
             <div className="text-xs relative">Browse</div>

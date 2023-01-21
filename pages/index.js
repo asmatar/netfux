@@ -11,10 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { getNetflixOriginalsFilm, getTrendingFilm, getTopRatedFilm, getHistoryFilm, getScienceFictionFilm, getActionFilm, getDocumentariesFilm, getAnimationFilm, getAdventureFilm, getRomanceFilm, getComedyFilm, getHorrorFilm, getFantasyFilm, getCrimeFilm, getDramaFilm, getFamilyFilm } from '../redux/filmReducer';
-import { useState } from 'react';
-const Modal = dynamic(() => import('../components/Modal'), {
-  ssr: false,
-})
+
+const Modal = dynamic(() => import('../components/Modal'), {ssr: false,})
 
 export default function Home({favMovies}) {
 
@@ -23,19 +21,12 @@ export default function Home({favMovies}) {
   const {favoriteMovies} = useSelector(state => state.favorite) || favMovies
   const filteredMovie = useSelector(state => state.films.filteredMovie)
   const activeSearch = useSelector(state => state.films.activeSearch)
-  const [resCookie, setResCookie] = useState()
-  console.log("res cookie ", resCookie)
   const stringifyFavorite = JSON.stringify(favoriteMovies.slice(0, 300))
-  console.log("stringifyFavorite", stringifyFavorite)
-  console.log("cookies favorite", favMovies)
+
   useEffect(()=>{
     Cookies.set("favMovies", stringifyFavorite.slice(0, 2000))
   }, [stringifyFavorite])
 
-/*   useEffect(()=>{
-    Cookies.get("favMovies", stringifyFavorite)
-    setResCookie(Cookies.get("favMovies"))
-  }, [stringifyFavorite]) */
   
   return (
     <div>
@@ -108,9 +99,7 @@ export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({
 
 
   let ctx = req.cookies.user
-
   let favMovies = req.cookies.favMovies
-  console.log("favvv", favMovies)
 
   if (ctx === "false") {
     return {
@@ -125,11 +114,11 @@ export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({
     props: {favMovies}
   }
 
-  // revalidation : 10 sec => refetch after 10sec
-  // not Found => true or false, if true => render 404 page, il fail to fetch data
-  // redirect => user is redirect to another route redirect : {destination:"/"}
-  // context => object with query and other stuff
 })
+// revalidation : 10 sec => refetch after 10sec
+// not Found => true or false, if true => render 404 page, il fail to fetch data
+// redirect => user is redirect to another route redirect : {destination:"/"}
+// context => object with query and other stuff
 // get static path tell to nextjs which page sould be pre render
 // paths : [ {params: {id: "1"} } ]
 // fallback option => if we have lot of pages. if true we tell next that event if we don't have pre generated pages in the path params, id:2

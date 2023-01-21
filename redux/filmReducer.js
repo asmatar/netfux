@@ -78,12 +78,10 @@ const filmsSlice = createSlice({
         state.filteredMovie = [] 
         state.activeSearch = false
       } else {
-        console.log("state.action", state.action)
         let allFilms = [...state.action, ...state.adventure, ...state.animation, ...state.crime, ...state.comedy, ...state.documentaries, ...state.drama, ...state.family, ...state.fantasy, ...state.history, ...state.horror, ...state.netflixOriginals, ...state.romance, ...state.scienceFiction, ...state.topRated, ...state.trending]
         const uniqueFilm = Array.from(new Set(allFilms.map(film => film.id))).map(id => {
           return allFilms.find(film => film.id === id)
         })
-        console.log(uniqueFilm)
         state.filteredMovie = uniqueFilm.filter(film => film.title?.toLowerCase().includes(action.payload.toLowerCase())) 
         state.activeSearch = true
       }

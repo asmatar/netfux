@@ -58,18 +58,14 @@ const serieSlice = createSlice({
       state.topRated = action.payload
     },
     searchSeriesByName (state, action) {
-      console.log(action.payload)
       if (action.payload == "") { 
         state.filteredSeries = [] 
         state.activeSearch = false
       } else {
-        console.log(state.reality)
         let allSeries = [...state.animation, ...state.comedy, ...state.crime, ...state.documentaries, ...state.drama, ...state.family, ...state.kids, ...state.mystery, ...state.news, ...state.reality, ...state.talk, ...state.topRated]
-        console.log(allSeries)
         const uniqueSerie = Array.from(new Set(allSeries.map(serie => serie.id))).map(id => {
           return allSeries.find(serie => serie.id === id)
         })
-        console.log(uniqueSerie)
         state.filteredSeries = uniqueSerie.filter(serie => serie.name?.toLowerCase().includes(action.payload.toLowerCase()))
         state.activeSearch = true
       }
@@ -77,10 +73,10 @@ const serieSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-        return state = {
-            ...state,
-            ...action.payload.serie
-        };
+      return state = {
+          ...state,
+          ...action.payload.serie
+      };
     },
   },  
 });

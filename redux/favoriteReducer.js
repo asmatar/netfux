@@ -1,24 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-/* let favMovies;
-let favSeries;
-const getFromLocalStorage = (key) => {
-  if (!key || typeof window === 'undefined') {
-      return ""
-  }
-  return localStorage.getItem(key)
-} */
-/* if (typeof window !== 'undefined') {
-  // Perform localStorage action
-   favMovies = getFromLocalStorage() ? JSON.parse(localStorage.getItem('movieList') : [])
-   favSeries = JSON.parse(localStorage.getItem('serieList'))
-} */
-/* const initialState = { 
-  favoriteMovies: getFromLocalStorage("movieList") ? JSON.parse(getFromLocalStorage("movieList") || '{}') : [],
-  favoriteSeries: getFromLocalStorage("serieList") ? JSON.parse(getFromLocalStorage("serieList") || '{}') : []
-}; */
+
 const initialState = {
-  favoriteMovies: /* favMovies || */ /* (typeof window !== "undefined" && window.localStorage.getItem('movieList')) ? JSON.parse(window.localStorage.getItem('movieList')) : */ [],
-  favoriteSeries: /*f avSeries || */ [],
+  favoriteMovies: [],
+  favoriteSeries: [],
 }; 
 const favoriteSlice = createSlice({
   name: 'favorite',
@@ -55,22 +39,3 @@ const favoriteSlice = createSlice({
 export const {removeFromMyList, addToMyList} = favoriteSlice.actions;
 
 export default favoriteSlice.reducer;
-
-/* transform object of object into array of object  */
-/* 
-const objOfObjs = {
-   "one": {"id": 3},
-   "two": {"id": 4},
-
-   
-   
-};
-
-const arrayOfObj = Object.entries(objOfObjs).map((e) => ( { [e[0]]: e[1] } )); 
-
-
-Object.entries(ObjOfObjs).map(e => e[1]) 
-
-
-
-*/

@@ -10,6 +10,7 @@ const CastModal = ({handleCloseCardModal, id}) => {
     let url = `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const {data, error} = useSWR(url, fetcher)
+    
     useEffect(()=>{
         setCasting(data)
     }, [data])
