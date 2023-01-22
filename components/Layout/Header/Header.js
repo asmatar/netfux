@@ -8,10 +8,7 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import {searchByName} from "../../../redux/filmReducer"
 import {searchSeriesByName} from "../../../redux/serieReducer"
-//import { signOut } from 'firebase/auth';
-//import { signOut } from "firebase/auth";
 import {auth} from "../../../firebase"
-//import { signOut } from 'firebase/auth';
 import { useAuth } from '../../../context/authContext';
 
 function Header() {
@@ -19,10 +16,10 @@ function Header() {
   const router = useRouter()
   const [search, setSearch] = useState("")
   const {pathname} = useRouter()
-  //const user = auth.currentUser;
-  //console.log(pathname)
   const [isScroll, setIsScroll] = useState(false);
+  const {logout} = useAuth()
   const dispatch = useDispatch()
+
   const handleScroll = () => {
     if (window.scrollY > 0) {
       setIsScroll(true);
@@ -37,44 +34,14 @@ function Header() {
     dispatch(searchByName(event.target.value), setSearch(()=> event.target.value))
   }
   
-  const {logout} = useAuth()
   async function handleSignOut(event) {
     event.preventDefault()
-   console.log("in handle sign out headersign out")
-     /*console.log("curent user", user) */
-     await logout(auth).then(() => {
-      // Sign-out successful.
-     console.log("curent user in sign out") 
-     router.push("/login")
-
+    await logout(auth).then(() => {
+    router.push("/login")
     }).catch((error) => {
-      // An error happened.
-     console.log("curent user")
-     console.log("curent user", error)
-
+     console.log(error)
     });
-    
-     /* console.log("curent user in sign out after log out", user) */
-
   }
-/*   const handleSignOut = () => {
-    console.log("sign out")
-     console.log("curent user", user)
-     signOut(auth).then(() => {
-      // Sign-out successful.
-     console.log("curent user in sign out", user)
-     router.push("/login")
-
-    }).catch((error) => {
-      // An error happened.
-     console.log("curent user", user)
-     console.log("curent user", error)
-
-    });
-    
-     console.log("curent user in sign out after log out", user)
-
-  } */
  
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -99,11 +66,9 @@ function Header() {
           </Link>
           { pathname !== "/login" && <Nav/> }
         </div>
-        {/* cta-search */}
         { pathname === "/login"
         ?
         <>
-          {/* <button className='bg-[#e50914] text-white justify-center cursor-pointer text-center text:lg transition duration-200 ease px-4 py-1 rounded-sm hover:bg-[#f40612]'>Sign in</button> */}
           <Link  href={{
             pathname: '/login',
             query: { signinQuery: true },
@@ -120,8 +85,7 @@ function Header() {
             </div>
             <div className="relative flex items-center gap-x-2 cursor-pointer group">
               <Image
-                src="/avatar.jpg"
-                //objectFit="cover"
+                src="/images/header/avatar.jpg"
                 width={35}
                 height={35}
                 alt="profil logo"
@@ -131,7 +95,6 @@ function Header() {
                   <path d="M3.72598 6.523C3.75656 6.56742 3.79748 6.60373 3.84521 6.62882C3.89294 6.6539 3.94606 6.66701 3.99998 6.66701C4.0539 6.66701 4.10702 6.6539 4.15475 6.62882C4.20248 6.60373 4.2434 6.56742 4.27398 6.523L7.27398 2.18967C7.3087 2.13969 7.32907 2.08115 7.33286 2.0204C7.33665 1.95966 7.32372 1.89904 7.29547 1.84513C7.26723 1.79122 7.22475 1.74608 7.17266 1.71462C7.12056 1.68316 7.06084 1.66657 6.99998 1.66667H0.999979C0.93926 1.66692 0.879758 1.68372 0.827872 1.71526C0.775987 1.74679 0.73368 1.79188 0.705502 1.84567C0.677324 1.89945 0.664341 1.9599 0.667949 2.02051C0.671557 2.08112 0.691619 2.13961 0.725979 2.18967L3.72598 6.523Z" fill="white" />
                 </svg>
               </div>
-              {/* sign out modal */}
               <div className="opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 absolute top-14 right-0 w-52"
                      onClick={handleSignOut}
 

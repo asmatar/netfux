@@ -1,15 +1,14 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Image from 'next/image'
-//import Modal from './Modal'
-//import dynamic from 'next/dynamic'
 import { modalOpen } from '../redux/modalReducer'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-const FilmCard = ({film/* , handleModal */}) => {
+const FilmCard = ({film}) => {
 
   const router = useRouter()
   const type = (router.pathname === "/series") ? "tv" : "movie"
   const dispatch = useDispatch()
+  
   const handleModal = (id, type) => { 
     dispatch(modalOpen({id, type}))
   }

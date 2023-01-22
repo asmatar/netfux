@@ -12,6 +12,7 @@ module.exports = {
         NetflixBold: ['NetflixBold'],
       },
       screens: {
+        'normal-phone' : "400px",
         'big-phone': '500px',
         'login': '550px',
         'small-tab': '600px',

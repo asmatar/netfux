@@ -10,7 +10,6 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     modalOpen (state, action) {
-      console.log("payload",action.payload)
       state.id = action.payload.id
       state.show = true,
       state.type = action.payload.type
