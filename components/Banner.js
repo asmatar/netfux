@@ -32,7 +32,7 @@ function Banner() {
     movie 
       ?
         <>
-        <div className="flex flex-col justify-end space-y-2 mt-8 md:space-y-4 h-[45vw] pb-[4vw] lg:pb-[8vw] pl-4 big-phone:pl-6 lg:pl-12">
+        <div className="hidden md:flex flex-col justify-end space-y-2 mt-8 md:space-y-4 h-[45vw] pb-[4vw] lg:pb-[8vw] pl-4 big-phone:pl-6 lg:pl-12">
           <div className="flex items-center gap-x-2 self-start">
             <div className="absolute top-0 left-0 -z-10  w-screen h-[56.25vw] !bg-gradient">
               <Image

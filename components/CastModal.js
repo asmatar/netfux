@@ -17,11 +17,11 @@ const CastModal = ({handleCloseCardModal, id}) => {
     
   return ReactDOM.createPortal((
     <div className="fixed top-0 left-0 w-full h-full right-0 bottom-0 outline-none overflow-x-hidden overflow-y-auto bg-black/60 z-50 flex items-center justify-center animate-fade">
-        <div className="bg-[#181818] relative">
-            <div className="rounded-full bg-black p-2 w-min absolute top-[150px] right-3 cursor-pointer md:top-0" onClick={handleCloseCardModal}>
+        <div className="bg-[#181818] relative mt-[100px]">
+            <div className="rounded-full bg-black p-2 w-min absolute top-[200px] right-3 cursor-pointer md:top-0" onClick={handleCloseCardModal}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="Hawkins-Icon Hawkins-Icon-Standard"><path fillRule="evenodd" clipRule="evenodd" d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z" fill="currentColor"></path></svg>
             </div>
-            <div className="flex h-full w-[375px] flex-row justify-center flex-wrap overflow-scroll mt-[150px] md:w-[750px] md:mt-0">
+            <div className="flex h-full w-[375px] flex-row justify-center flex-wrap overflow-scroll mt-[180px] md:w-[750px] md:mt-0">
                 <div className="h-full basis-[375px]">
                     <img className="h-full w-full object-top object-cover" src={existPicture} alt="" />
                 </div>

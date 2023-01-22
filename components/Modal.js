@@ -84,7 +84,7 @@ const Modal = () => {
     <>
       <div className="modal animate-fade fixed top-0 left-0 right-0 bottom-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto bg-black/60 z-50 flex items-center justify-center" /* onClick={() => setShowModal(false)} */>
         <ToastContainer />  
-        <div className="min-w-full w-full big-phone:min-w-[85%] big-phone:w-[85%] lg:w-[850px] lg:min-w-[850px] lg:mt-4">
+        <div className="min-w-full w-full mt-[100px] normal-phone:mt-0 big-phone:min-w-[85%] big-phone:w-[85%] lg:w-[850px] lg:min-w-[850px] lg:mt-4">
           { trailer !== undefined 
           ?
             <div className="flex justify-center items-center min-w-full w-full lg:min-w-[850px] lg:w-[850px] big-phone:h-[380px] lg:h-[480px] h-[250px] rounded-t-lg overflow-hidden relative">

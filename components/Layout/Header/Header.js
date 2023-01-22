@@ -85,7 +85,7 @@ function Header() {
             </div>
             <div className="relative flex items-center gap-x-2 cursor-pointer group">
               <Image
-                src="/avatar.jpg"
+                src="/images/header/avatar.jpg"
                 width={35}
                 height={35}
                 alt="profil logo"

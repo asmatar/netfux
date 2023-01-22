@@ -14,14 +14,12 @@ const favoriteSlice = createSlice({
         const isExist = state.favoriteMovies.find(item => item.id === action.payload.id)
         if (!isExist) {
           state.favoriteMovies.push(action.payload.movie)
-        } else {            
-        }
+        } 
       } else {
         const isExist = state.favoriteSeries.find(item => item.id === action.payload.id)
         if (!isExist) {
           state.favoriteSeries.push(action.payload.movie)
-        } else {            
-        }
+        } 
       }          
     },
     removeFromMyList (state, action) {      
