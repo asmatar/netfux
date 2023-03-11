@@ -4,64 +4,44 @@ import { useDispatch } from 'react-redux'
 import { modalOpen } from '../../redux/modalReducer'
 import dynamic from 'next/dynamic'
 import { useSelector } from 'react-redux';
+import baseUrl from '../../constant/movie'
 import Casting from '../../components/Casting'
 import Similar from '../../components/Similar'
 import Reviews from '../../components/Reviews'
 import { useRouter } from 'next/router'
-import { addToMyList, removeFromMyList } from '../../redux/favoriteReducer'
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import { useRemoveFromFavorite, useAddToFavorite } from "../../hooks/useToastFunction"
 import 'react-toastify/dist/ReactToastify.css';
 const Modal = dynamic(() => import('../../components/Modal'), {ssr: false,})
 
 const Detail = ({reviewsData, castData, similarData, detailData}) => {
 
-  const router = useRouter()
+/*   const [favorite, setFavorite] = useState(false) */
+  const removeFromFavorite = useRemoveFromFavorite();
+  const addToMyFavorite = useAddToFavorite();
   const dispatch = useDispatch()
-  const type = (router.pathname === "/series" || router.query.slug[0] === "tv") ? "tv" : "movie"
+  const {show} = useSelector(state => state.modal)
   const CurrentFavoriteMovie = useSelector(state => state.favorite.favoriteMovies)
   const CurrentFavoriteSerie = useSelector(state => state.favorite.favoriteSeries)
-  const [favorite, setFavorite] = useState(false)
+  const router = useRouter()
+
+  const type = (router.pathname === "/series" || router.query.slug[0] === "tv") ? "tv" : "movie"
   let CurrentFavorite = type === "movie" ? CurrentFavoriteMovie : CurrentFavoriteSerie
-  const path = `https://image.tmdb.org/t/p/original${detailData?.backdrop_path || detailData?.poster_path}`
-  const {show} = useSelector(state => state.modal)
+  const path = `${baseUrl}/${detailData?.backdrop_path || detailData?.poster_path}`
   const favoriteCurrentId = CurrentFavorite.find(fav => fav.id === +router.query.slug[1])
 
+  const handleRemoveFromFavorite = (id) => {
+    removeFromFavorite(id)
+  }
+  const handleFavorite = (movie, type) => {
+    addToMyFavorite(movie, type)
+  }
   const handleModal = (id, type) => {
     dispatch(modalOpen({id, type}))
   } 
-  const handleFavorite = (movie, type) => {
-    dispatch(addToMyList({movie, type}),
-    setFavorite(true),
-    toast.success('Add to my favorite', {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      })
-    )
-  }
-  const handleRemoveFromFavorite = (id) => {
-    dispatch(removeFromMyList(id),
-    setFavorite(false),
-    toast.error('Remove from my favorite', {
-     position: "bottom-right",
-     autoClose: 3000,
-     hideProgressBar: false,
-     closeOnClick: true,
-     pauseOnHover: true,
-     draggable: true,
-     progress: undefined,
-     theme: "light",
-     })
-     )
-   }
- 
+  
   return (
-   <section className="bg-cover flex w-full justify-center bg-center"
+    <section className="bg-cover flex w-full justify-center bg-center"
     style={{backgroundImage:`linear-gradient(to bottom, rgba(0,0,0, .8) 0%, rgba(0,0,0, .8) 100%), url(${path})`}}>
      <ToastContainer />
       <div className="max-w-[1360px] w-full px-4 lg:px-10 flex flex-col gap-y-28">

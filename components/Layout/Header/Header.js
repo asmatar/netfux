@@ -13,10 +13,10 @@ import { useAuth } from '../../../context/authContext';
 
 function Header() {
 
-  const router = useRouter()
   const [search, setSearch] = useState("")
-  const {pathname} = useRouter()
   const [isScroll, setIsScroll] = useState(false);
+  const router = useRouter()
+  const {pathname} = useRouter()
   const {logout} = useAuth()
   const dispatch = useDispatch()
 
@@ -27,11 +27,9 @@ function Header() {
       setIsScroll(false);
     }
   };
+
   const handleSearchName = (event) => {
-    pathname.includes("series") ?
-    dispatch(searchSeriesByName(event.target.value), setSearch(()=> event.target.value))
-    :
-    dispatch(searchByName(event.target.value), setSearch(()=> event.target.value))
+    pathname.includes("series") ? dispatch(searchSeriesByName(event.target.value), setSearch(()=> event.target.value)) : dispatch(searchByName(event.target.value), setSearch(()=> event.target.value))
   }
   
   async function handleSignOut(event) {

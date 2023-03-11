@@ -1,13 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import React, {useEffect, useState} from 'react'
 import ReactDOM from 'react-dom'
-import baseUrl from "../constant/movie"
+import {fetchUrl} from "../constant/movie"
 import useSWR from "swr"
 
 const CastModal = ({handleCloseCardModal, id}) => {
     const [casting, setCasting] = useState(null)
+    
     const existPicture = casting?.profile_path ? `https://image.tmdb.org/t/p/original${casting?.profile_path}` : "/anonyme.jpeg"
-    let url = `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
+    let url = `${fetchUrl}person/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
+    
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const {data, error} = useSWR(url, fetcher)
     

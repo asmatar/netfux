@@ -3,11 +3,13 @@ import Image from 'next/image'
 import { modalOpen } from '../redux/modalReducer'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
+import { getType } from '../utils/getType';
+
 const FilmCard = ({film}) => {
 
   const router = useRouter()
-  const type = (router.pathname === "/series") ? "tv" : "movie"
   const dispatch = useDispatch()
+  const type = getType(router.pathname);
   
   const handleModal = (id, type) => { 
     dispatch(modalOpen({id, type}))

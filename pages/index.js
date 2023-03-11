@@ -96,10 +96,8 @@ export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({
   wrapper.dispatch(getTopRatedFilm(TopRatedMovies.results))
   wrapper.dispatch(getTrendingFilm(TrendingMovies.results)) 
 
-
-
   let ctx = req.cookies.user
-  let favMovies = req.cookies.favMovies
+  let favMovies = req.cookies.favMovies || null
 
   if (ctx === "false") {
     return {

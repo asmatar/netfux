@@ -22,18 +22,18 @@ const Footer = () => {
         </div>
         <div className="">
           <ul className="grid tablette-md:grid-cols-4 grid-cols-2 gap-y-4 text-net-gray">
-            <li className="cursor-pointer hover:underline">Audio description</li>
-            <li className="cursor-pointer hover:underline">help center</li>
-            <li className="cursor-pointer hover:underline">Gift Cards</li>
-            <li className="cursor-pointer hover:underline">Media center</li>
-            <li className="cursor-pointer hover:underline">Investor Relations</li>
-            <li className="cursor-pointer hover:underline">Jobs</li>
-            <li className="cursor-pointer hover:underline">Terrms of Use</li>
-            <li className="cursor-pointer hover:underline">privacity</li>
-            <li className="cursor-pointer hover:underline">Legal Notices</li>
-            <li className="cursor-pointer hover:underline">Cooki Preferences</li>
-            <li className="cursor-pointer hover:underline">Corporate Information</li>
-            <li className="cursor-pointer hover:underline">Contact Us</li>
+            <li className="footer-links">Audio description</li>
+            <li className="footer-links">help center</li>
+            <li className="footer-links">Gift Cards</li>
+            <li className="footer-links">Media center</li>
+            <li className="footer-links">Investor Relations</li>
+            <li className="footer-links">Jobs</li>
+            <li className="footer-links">Terrms of Use</li>
+            <li className="footer-links">privacity</li>
+            <li className="footer-links">Legal Notices</li>
+            <li className="footer-links">Cooki Preferences</li>
+            <li className="footer-links">Corporate Information</li>
+            <li className="footer-links">Contact Us</li>
           </ul>
         </div>
         <p className="text-xs text-net-gray">made by <a href="https://arthur-deruelle.netlify.app/" target="_blank" className="text-white font-bold cursor-pointer hover:text-red-400 transition-all duration-200" rel="noreferrer">deruelle Arthur</a> 2022</p>

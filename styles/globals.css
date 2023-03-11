@@ -31,4 +31,10 @@
   .input {
     @apply w-full rounded bg-[#333333] px-5 py-3.5 placeholder-[gray] outline-none focus:bg-[#454545];
   }
+  .nav-links{
+    @apply hover:text-gray-400 hover:bg-[#141414] transition-all duration-200 ease-in bg-black/70 sm:bg-transparent sm:hover:bg-transparent cursor-pointer py-3 w-full flex justify-center
+  }
+  .footer-links{
+    @apply cursor-pointer hover:underline
+  }
 }
