@@ -1,7 +1,7 @@
 import React from 'react'
 import Films from './Films';
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import {useRouter} from 'next/router';
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,9 +11,11 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 
 const Similar = ({similar}) => {
+  const router = useRouter()
+  const carouselCardStyle = router.pathname.includes("details") ? "!h-full" : ""
 
   const displayFilm = similar.map(film => (
-    <SwiperSlide className='w-full !h-[200px] flex flex-col gap-y-2' key={film.id}>
+    <SwiperSlide className={`${carouselCardStyle} w-full !h-[200px] flex flex-col gap-y-2`} key={film.id}>
       <Films films={film}/>
     </SwiperSlide>
   ))

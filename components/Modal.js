@@ -15,16 +15,16 @@ import { useRemoveFromFavorite, useAddToFavorite } from "../hooks/useToastFuncti
 const Modal = () => {
 
   const router = useRouter()
-  const [muted, setMuted] = useState(false)
-  const currentFilmId = useSelector(state => state.modal.id)
   const filmOrMovie = (router.pathname === "/series" || (router.query.slug !== undefined && router.query.slug[0] !== "movie") ) ? "tv" : "movie" 
-  const { genres, trailer, movie } = useMovieData(currentFilmId, filmOrMovie);
-  const currentPath = useSelector(state => state.modal.type)
+  const [muted, setMuted] = useState(false)
   const dispatch = useDispatch()
+  const currentFilmId = useSelector(state => state.modal.id)
+  const currentPath = useSelector(state => state.modal.type)
   const {favoriteMovies} = useSelector(state => state.favorite)
   const {favoriteSeries} = useSelector(state => state.favorite)
   const removeFromFavorite = useRemoveFromFavorite();
   const addToMyFavorite = useAddToFavorite();
+  const { genres, trailer, movie } = useMovieData(currentFilmId, filmOrMovie);
 
   const sameMovie = favoriteMovies.find(item => item.id === movie?.id)
   const sameSerie = favoriteSeries.find(item => item.id === movie?.id)
