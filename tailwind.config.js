@@ -30,9 +30,16 @@ module.exports = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        fadeCard: {
+          '0%': { visibility:'visible', opacity: '1', transform: 'translateY(71%)'},
+          '1%': { visibility:'visible', opacity: '1', transform: 'translateY(71%)'},
+          '90%': { visibility:'visible', opacity: '1', transform: 'translateY(71%)'},
+          '100%': { visibility:'visible', opacity: '1', transform: 'translateY(71%)'},
+        },
       },
       animation: {
         fade: 'fade .2s ease-out',
+        fadeCard: 'fadeCard .3s linear',
       },
        boxShadow: {
         '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
@@ -45,5 +52,6 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar-hide'),
     require('tailwind-scrollbar'),
+    require("tailwindcss-animation-delay"),
   ],
 };
