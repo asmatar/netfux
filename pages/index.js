@@ -37,7 +37,7 @@ export default function Home({favMovies}) {
       </Head>
       <main>
         <Banner />
-        <section className="flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12 mt-10">
+        <section className="flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12 mt-10 md:mt-0">
         <ToastContainer />
           { filteredMovie.length <1 && activeSearch === false ? (
           <>
@@ -96,10 +96,8 @@ export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({
   wrapper.dispatch(getTopRatedFilm(TopRatedMovies.results))
   wrapper.dispatch(getTrendingFilm(TrendingMovies.results)) 
 
-
-
   let ctx = req.cookies.user
-  let favMovies = req.cookies.favMovies
+  let favMovies = req.cookies.favMovies || null
 
   if (ctx === "false") {
     return {

@@ -1,84 +1,47 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom'
 import ReactPlayer from 'react-player/lazy'
-import Button from './UI/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import { modalClose } from '../redux/modalReducer'
-import { addToMyList, removeFromMyList } from '../redux/favoriteReducer'
 import Link from 'next/link'
 import Loader from './UI/Loader'
-import { toast, ToastContainer } from 'react-toastify';
+import {ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
-import useSWR from "swr"
+import useMovieData from '../hooks/useMovieData'
+
+import { useRemoveFromFavorite, useAddToFavorite } from "../hooks/useToastFunction"
 
 const Modal = () => {
-  const currentFilmId = useSelector(state => state.modal.id)
-  const currentPath = useSelector(state => state.modal.type)
-  const [genres, setGenres] = useState([])
-  const [trailer, setTrailer] = useState('')
-  const [movie, setMovie] = useState([])
+
+  const router = useRouter()
+  const filmOrMovie = (router.pathname === "/series" || (router.query.slug !== undefined && router.query.slug[0] !== "movie") ) ? "tv" : "movie" 
   const [muted, setMuted] = useState(false)
   const dispatch = useDispatch()
+  const currentFilmId = useSelector(state => state.modal.id)
+  const currentPath = useSelector(state => state.modal.type)
+  const {favoriteMovies} = useSelector(state => state.favorite)
+  const {favoriteSeries} = useSelector(state => state.favorite)
+  const removeFromFavorite = useRemoveFromFavorite();
+  const addToMyFavorite = useAddToFavorite();
+  const { genres, trailer, movie } = useMovieData(currentFilmId, filmOrMovie);
+
+  const sameMovie = favoriteMovies.find(item => item.id === movie?.id)
+  const sameSerie = favoriteSeries.find(item => item.id === movie?.id)
+
+  const handleRemoveFromFavorite = (id) => {
+    removeFromFavorite(id)
+  }
+  const handleFavorite = (movie, filmOrMovie) => {
+    addToMyFavorite(movie, filmOrMovie)
+  }
   const handleCloseModal = () => {
     dispatch(modalClose())
   }
-  const router = useRouter()
-  const {favoriteMovies} = useSelector(state => state.favorite)
-  const {favoriteSeries} = useSelector(state => state.favorite)
-  const filmOrMovie = (router.pathname === "/series" || (router.query.slug !== undefined && router.query.slug[0] !== "movie") ) ? "tv" : "movie" 
-  const handleRemoveFromFavorite = (id) => {
-   dispatch(removeFromMyList(id),
-   toast.error('Remove from my favorite', {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-    })
-    )
-  }
-
-  const type = (router.pathname === "/series") ? "tv" : "movie"
-  const sameMovie = favoriteMovies.find(item => item.id === movie?.id)
-  const sameSerie = favoriteSeries.find(item => item.id === movie?.id)
-  let url = `https://api.themoviedb.org/3/${filmOrMovie}/${currentFilmId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&append_to_response=videos`
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  const {data, error} = useSWR(url, fetcher)
-
-  useEffect(()=>{
-    setMovie(data)
-    if (data?.videos) {
-      const index = data.videos.results.findIndex(
-        (element) => element.type === 'Trailer'
-      )
-      setTrailer(data.videos?.results[index]?.key)
-    }
-    if (data?.genres) {
-      setGenres(data.genres)
-    }
-  }, [data])
-    const handleMute = () => {
+  
+  const handleMute = () => {
     setMuted((prev) => !prev)
-  }
-
-  const handleFavorite = (movie, type) => {
-    dispatch(addToMyList({movie, type}),
-    toast.success('Add to my favorite', {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      })
-    )
-  }
+  } 
 
   return ReactDOM.createPortal((
     <>
@@ -96,10 +59,10 @@ const Modal = () => {
               :
               <>
               <div className="absolute bottom-5 sm:bottom-10 left-10 z-20 flex gap-x-2 items-center">
-                <Button className="bannerButton bg-white text-black">
+                <button className="bannerButton bg-white text-black">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="Hawkins-Icon Hawkins-Icon-Standard"><path d="M4 2.69127C4 1.93067 4.81547 1.44851 5.48192 1.81506L22.4069 11.1238C23.0977 11.5037 23.0977 12.4963 22.4069 12.8762L5.48192 22.1849C4.81546 22.5515 4 22.0693 4 21.3087V2.69127Z" fill="currentColor"/></svg>
                   Play
-                </Button>
+                </button>
                 <Link href={`/details/${currentPath}/${movie.id}`} className="relative flex flex-col gap-y-4 group" onClick={handleCloseModal}>
                   <div className="transition-all duration-500 py-2 px-4 absolute -top-16 left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible w-max text-black rounded">
                     <p className="bg-white/80 rounded py-2 px-4">More details</p>
@@ -115,7 +78,7 @@ const Modal = () => {
                 </Link>
                 { (sameMovie || sameSerie) === undefined 
                 ?    
-                  <div className="relative flex flex-col gap-y-4 group" onClick={() => handleFavorite(movie, type)}>
+                  <div className="relative flex flex-col gap-y-4 group" onClick={() => handleFavorite(movie, filmOrMovie)}>
                     <div className="transition-all duration-500 py-2 px-4 absolute -top-16 left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible w-max text-black rounded">
                 
                       <p className="bg-white/80 rounded py-2 px-4" >Add to my list</p>

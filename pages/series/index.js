@@ -28,7 +28,7 @@ export default function Series() {
       </Head>
       <main>
         <Banner />
-        <section className="flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12 mt-10 md:mt-0">
+        <section className="bg-overlay flex flex-col gap-y-8 pl-4 big-phone:pl-6 lg:pl-12 mt-10 md:mt-0">
         <ToastContainer />
           { filteredSeries.length <1 && activeSearch === false ? (
           <>

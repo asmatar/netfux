@@ -8,8 +8,8 @@ const Review = ({name, coment, rating, date, avatar}) => {
           src={`https://image.tmdb.org/t/p/original${avatar}`} 
           alt="author avatar" 
           width={200}
-          height={200}
-          className="object-cover mx-auto big-phone:mx-0"
+          height={200} 
+          className="object-cover object-center mx-auto big-phone:mx-0"
         />
         <div className="flex flex-col lg:ml-2 gap-y-2 text-sm">
           <div className="flex gap-x-4 items-center">

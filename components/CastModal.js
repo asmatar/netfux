@@ -1,13 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import React, {useEffect, useState} from 'react'
 import ReactDOM from 'react-dom'
-import baseUrl from "../constant/movie"
+import {fetchUrl} from "../constant/movie"
 import useSWR from "swr"
 
 const CastModal = ({handleCloseCardModal, id}) => {
     const [casting, setCasting] = useState(null)
+    
     const existPicture = casting?.profile_path ? `https://image.tmdb.org/t/p/original${casting?.profile_path}` : "/anonyme.jpeg"
-    let url = `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
+    let url = `${fetchUrl}person/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
+    
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const {data, error} = useSWR(url, fetcher)
     
@@ -17,8 +19,8 @@ const CastModal = ({handleCloseCardModal, id}) => {
     
   return ReactDOM.createPortal((
     <div className="fixed top-0 left-0 w-full h-full right-0 bottom-0 outline-none overflow-x-hidden overflow-y-auto bg-black/60 z-50 flex items-center justify-center animate-fade">
-        <div className="bg-[#181818] relative mt-[100px]">
-            <div className="rounded-full bg-black p-2 w-min absolute top-[200px] right-3 cursor-pointer md:top-0" onClick={handleCloseCardModal}>
+        <div className="bg-[#181818] relative mt-[180px] normal-phone:mt-[100px]">
+            <div className="rounded-full bg-black p-2 w-min absolute top-[200px] right-6 cursor-pointer md:top-0" onClick={handleCloseCardModal}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="Hawkins-Icon Hawkins-Icon-Standard"><path fillRule="evenodd" clipRule="evenodd" d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z" fill="currentColor"></path></svg>
             </div>
             <div className="flex h-full w-[375px] flex-row justify-center flex-wrap overflow-scroll mt-[180px] md:w-[750px] md:mt-0">
