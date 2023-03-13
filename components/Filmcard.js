@@ -29,8 +29,8 @@ const FilmCard = ({film}) => {
         />
         <div class="invisible absolute top-[50%] left-0 right-0 p-2 bg-[#141414] flex flex-col rounded-sm items-start text-xs justify-end gap-y-2 group-hover:shadow-xl 
                      transition-all  duration-500 group-hover:z-20 group-hover:visible group-hover:scale-150 group-hover:translate-y-[75%] -z-10">
-            <h6 className="font-NetflixBold self-start w-full">{film?.title || film?.name}</h6>
-            <p className="">{film?.overview?.substring(0, 100) + "..."}</p> 
+          <h6 className="font-NetflixBold self-start w-full">{film?.title || film?.name}</h6>
+          <p className="">{film?.overview?.substring(0, 100) + "..."}</p> 
         </div>
       </div>
     </div>
