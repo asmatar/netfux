@@ -18,7 +18,7 @@ const Films = ({films}) => {
   const sameMovie = favoriteMovies.find(item => item.id === films.id) || undefined
   const sameSeries = favoriteSeries !== undefined && favoriteSeries.find(item => item.id === films.id) || undefined
   const type = films.number_of_episodes !== undefined ? "tv" : "movie" 
-  const FilmCardDetailPageStyle = router.pathname.includes("details") ? " !h-27vw small-tab:!h-[26vw] md:!h-[18vw]" : ""
+  const FilmCardDetailPageStyle = router.pathname.includes("details") ? "!h-[27vw] small-tab:!h-[26vw] md:!h-[18vw]" : ""
   return (
     <>
       <div  className="flex flex-col gap-y-2 hover:scale-105 transition-all duration-200 ease relative" >
