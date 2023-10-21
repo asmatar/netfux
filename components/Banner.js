@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import Image from "next/image"
 import {useDispatch, useSelector} from "react-redux"
 import baseUrl from '../constant/movie'
-import {modalOpen} from "../redux/modalReducer"
+import {modalOpen} from "@/redux/modalReducer"
 import Loader from './UI/Loader';
 import {useRouter} from "next/router";
 import { getType } from '../utils/getType';
@@ -33,7 +33,7 @@ function Banner() {
         <>
         <div className="hidden md:flex flex-col justify-end space-y-2 mt-8 md:space-y-4 h-[45vw] pb-[4vw] lg:pb-[8vw] pl-4 big-phone:pl-6 lg:pl-12">
           <div className="flex items-center gap-x-2 self-start">
-            <div className="absolute top-0 left-0 -z-10  w-screen h-[56.25vw] !bg-gradient">
+            <div className="absolute top-0 left-0 -z-10  w-[99vw] h-[56.25vw] !bg-gradient">
               <Image
                 fill
                 src={`${baseUrl}/${movie?.backdrop_path || movie?.poster_path}`}

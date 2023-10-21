@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "imports": {
+    "#*": "./src/*"
+  },
   "dependencies": {
     "@next/font": "^13.0.5",
     "@reduxjs/toolkit": "^1.9.0",
@@ -33,6 +36,7 @@
     "tailwindcss-animation-delay": "^1.0.7"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",

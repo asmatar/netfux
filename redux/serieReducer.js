@@ -3,8 +3,8 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 const initialState = {
     animation: [] || null,
-    comedy: [] || null,
-    crime: [] || null,
+/*     comedy: [] || null,
+    crime: [] || null, */
     documentaries: [] || null,
     drama: [] || null,
     family: [] || null,
@@ -24,12 +24,12 @@ const serieSlice = createSlice({
     getAnimationTv (state, action) {
       state.animation = action.payload
     },
-    getComedyTv (state, action) {
+/*     getComedyTv (state, action) {
       state.comedy = action.payload
     }, 
     getCrimeTv (state, action) {
       state.crime = action.payload
-    },
+    }, */
     getDocumentariesTv (state, action) {
       state.documentaries = action.payload
     },
@@ -62,7 +62,7 @@ const serieSlice = createSlice({
         state.filteredSeries = [] 
         state.activeSearch = false
       } else {
-        let allSeries = [...state.animation, ...state.comedy, ...state.crime, ...state.documentaries, ...state.drama, ...state.family, ...state.kids, ...state.mystery, ...state.news, ...state.reality, ...state.talk, ...state.topRated]
+        let allSeries = [...state.animation, /* ...state.comedy, ...state.crime, */ ...state.documentaries, ...state.drama, ...state.family, ...state.kids, ...state.mystery, ...state.news, ...state.reality, ...state.talk, ...state.topRated]
         const uniqueSerie = Array.from(new Set(allSeries.map(serie => serie.id))).map(id => {
           return allSeries.find(serie => serie.id === id)
         })
@@ -81,6 +81,6 @@ const serieSlice = createSlice({
   },  
 });
 
-export const {getAnimationTv, getComedyTv, getCrimeTv, getDocumentariesTv, getDramaTv, getFamilyTv, getKidsTv, getMysteryTv, getNewsTv,getRealityTv, getTalkTv, getTopRatedTv, searchSeriesByName} = serieSlice.actions;
+export const {getAnimationTv,/*  getComedyTv, getCrimeTv, */ getDocumentariesTv, getDramaTv, getFamilyTv, getKidsTv, getMysteryTv, getNewsTv,getRealityTv, getTalkTv, getTopRatedTv, searchSeriesByName} = serieSlice.actions;
 
 export default serieSlice.reducer;

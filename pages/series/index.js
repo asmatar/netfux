@@ -1,15 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
 import Head from 'next/head';
-import Banner from '../../components/Banner';
-import Row from '../../components/Row';
+import Banner from '@/components/Banner';
+import Row from '@/components/Row';
 import {tvRequest} from "../../utils/request"
-import { wrapper } from '../../redux/store';
+import { wrapper } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getAnimationTv, getComedyTv, getCrimeTv, getDocumentariesTv, getDramaTv, getFamilyTv, getKidsTv, getMysteryTv, getNewsTv,getRealityTv, getTalkTv, getTopRatedTv } from '../../redux/serieReducer';
-const Modal = dynamic(() => import('../../components/Modal'), {ssr: false,})
+import { getAnimationTv, getComedyTv, getCrimeTv, getDocumentariesTv, getDramaTv, getFamilyTv, getKidsTv, getMysteryTv, getNewsTv,getRealityTv, getTalkTv, getTopRatedTv } from '@/redux/serieReducer';
+const Modal = dynamic(() => import('@/components/Modal'), {ssr: false,})
 
 export default function Series() {
 
@@ -34,8 +34,8 @@ export default function Series() {
           <>
           <Row CategoryTitle={"Animation"} filmsCategory={animation}/>
           { favoriteSeries.length >0  && <Row CategoryTitle={"My list"} filmsCategory={favoriteSeries}  />}
-          <Row CategoryTitle={"Comedy"} filmsCategory={comedy}/>
-          <Row CategoryTitle={"Crime"} filmsCategory={crime}/>
+{/*           <Row CategoryTitle={"Comedy"} filmsCategory={comedy}/>
+          <Row CategoryTitle={"Crime"} filmsCategory={crime}/> */}
           <Row CategoryTitle={"Documentaries"} filmsCategory={documentaries}/>
           <Row CategoryTitle={"Drama"} filmsCategory={drama}/>
           <Row CategoryTitle={"Family"} filmsCategory={family}/>
@@ -59,16 +59,16 @@ export default function Series() {
 }
 export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({req}) => {
   
-  const [fetchAnimation, fetchComedy, fetchCrime, fetchDocumentaries, fetchDrama, fetchFamily, fetchKids, fetchMystery, fetchNews, fetchReality, fetchTalk, fetchTopRated] = await Promise.all([
-    fetch(tvRequest.fetchAnimation), fetch(tvRequest.fetchComedy), fetch(tvRequest.fetchCrime), fetch(tvRequest.fetchDocumentaries), fetch(tvRequest.fetchDrama), fetch(tvRequest.fetchFamily), fetch(tvRequest.fetchKids), fetch(tvRequest.fetchMystery), fetch(tvRequest.fetchNews), fetch(tvRequest.fetchReality), fetch(tvRequest.fetchTalk), fetch(tvRequest.fetchTopRated)
+  const [fetchAnimation, /* fetchComedy, fetchCrime, */ fetchDocumentaries, fetchDrama, fetchFamily, fetchKids, fetchMystery, fetchNews, fetchReality, fetchTalk, fetchTopRated] = await Promise.all([
+    fetch(tvRequest.fetchAnimation), /* fetch(tvRequest.fetchComedy), fetch(tvRequest.fetchCrime), */ fetch(tvRequest.fetchDocumentaries), fetch(tvRequest.fetchDrama), fetch(tvRequest.fetchFamily), fetch(tvRequest.fetchKids), fetch(tvRequest.fetchMystery), fetch(tvRequest.fetchNews), fetch(tvRequest.fetchReality), fetch(tvRequest.fetchTalk), fetch(tvRequest.fetchTopRated)
   ]);
   
-  const [animation, comedy, crime,documentaries, drama, family, kids,  mystery, news, reality, talk, topRated] = 
-  await Promise.all([fetchAnimation.json(), fetchComedy.json(), fetchCrime.json(),fetchDocumentaries.json(),fetchDrama.json(),fetchFamily.json(), fetchKids.json(),fetchMystery.json(),  fetchNews.json(), fetchReality.json(), fetchTalk.json(), fetchTopRated.json()])
+  const [animation, /* comedy, crime, */documentaries, drama, family, kids,  mystery, news, reality, talk, topRated] = 
+  await Promise.all([fetchAnimation.json(), /* fetchComedy.json(), fetchCrime.json(), */fetchDocumentaries.json(),fetchDrama.json(),fetchFamily.json(), fetchKids.json(),fetchMystery.json(),  fetchNews.json(), fetchReality.json(), fetchTalk.json(), fetchTopRated.json()])
 
   wrapper.dispatch(getAnimationTv(animation.results))
-  wrapper.dispatch(getComedyTv(comedy.results))
-  wrapper.dispatch(getCrimeTv(crime.results))
+/*   wrapper.dispatch(getComedyTv(comedy.results))
+  wrapper.dispatch(getCrimeTv(crime.results)) */
   wrapper.dispatch(getDocumentariesTv(documentaries.results))
   wrapper.dispatch(getDramaTv(drama.results))
   wrapper.dispatch(getFamilyTv(family.results))

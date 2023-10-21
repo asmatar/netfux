@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { removeFromMyList, addToMyList } from '../redux/favoriteReducer';
+import { removeFromMyList, addToMyList } from '@/redux/favoriteReducer';
 import { toast } from 'react-toastify';
 
 export function useRemoveFromFavorite() {

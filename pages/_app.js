@@ -1,8 +1,8 @@
 import '../styles/globals.css';
 import localFont from '@next/font/local';
 import { Provider } from 'react-redux';
-import Layout from '../components/Layout/layout';
-import {wrapper} from "../redux/store";
+import Layout from '@/components/Layout/layout';
+import {wrapper} from "@/redux/store";
 import { AuthContextProvider } from '../context/authContext'
 
 const netflixFont = localFont({ src: '../public/font/NetflixSans-Light.otf' });

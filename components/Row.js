@@ -2,7 +2,7 @@ import FilmCard from './Filmcard';
 import {useRef} from "react"
 
 function Row({ filmsCategory, CategoryTitle}) {
-
+  console.log(filmsCategory)
   const rowRef = useRef(null)
 
   const displayFilmCategory = filmsCategory?.map((film)=>(

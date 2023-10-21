@@ -1,18 +1,18 @@
 /* eslint-disable react/react-in-jsx-scope */
 import Head from 'next/head';
-import Banner from '../components/Banner';
-import Row from '../components/Row';
+import Banner from '@/components/Banner';
+import Row from '@/components/Row';
 import {request} from "../utils/request"
-import { wrapper } from '../redux/store';
+import { wrapper } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { getNetflixOriginalsFilm, getTrendingFilm, getTopRatedFilm, getHistoryFilm, getScienceFictionFilm, getActionFilm, getDocumentariesFilm, getAnimationFilm, getAdventureFilm, getRomanceFilm, getComedyFilm, getHorrorFilm, getFantasyFilm, getCrimeFilm, getDramaFilm, getFamilyFilm } from '../redux/filmReducer';
+import { getNetflixOriginalsFilm, getTrendingFilm, getTopRatedFilm, getHistoryFilm, getScienceFictionFilm, getActionFilm, getDocumentariesFilm, getAnimationFilm, getAdventureFilm, getRomanceFilm, getComedyFilm,/*  getHorrorFilm, getFantasyFilm, getCrimeFilm, getDramaFilm, getFamilyFilm */ } from '@/redux/filmReducer';
 
-const Modal = dynamic(() => import('../components/Modal'), {ssr: false,})
+const Modal = dynamic(() => import('@/components/Modal'), {ssr: false,})
 
 export default function Home({favMovies}) {
 
@@ -51,13 +51,13 @@ export default function Home({favMovies}) {
           <Row CategoryTitle={"Documentaries"} filmsCategory={documentaries} />
           <Row CategoryTitle={"Animation"} filmsCategory={animation} />
           <Row CategoryTitle={"Adventure"} filmsCategory={adventure} />
-          <Row CategoryTitle={"Romance"} filmsCategory={romance} />
+           {/* <Row CategoryTitle={"Romance"} filmsCategory={romance} />
           <Row CategoryTitle={"Comedy"} filmsCategory={comedy} />
-          <Row CategoryTitle={"Horror"} filmsCategory={horror} />
+         <Row CategoryTitle={"Horror"} filmsCategory={horror} />
           <Row CategoryTitle={"Crime"} filmsCategory={crime} />
           <Row CategoryTitle={"Drama"} filmsCategory={drama} />
           <Row CategoryTitle={"Fantasy"} filmsCategory={fantasy} />
-          <Row CategoryTitle={"Family"} filmsCategory={family} />
+          <Row CategoryTitle={"Family"} filmsCategory={family} /> */}
           </>)
           :
           (filteredMovie.length <1 && activeSearch === true) ?
@@ -72,29 +72,29 @@ export default function Home({favMovies}) {
   );
 }
 export const getServerSideProps = wrapper.getServerSideProps(wrapper => async ({req}) => {
-  
-  const [fetchActionMovies , fetchAdventureMovies, fetchAnimationMovies,fetchCrimeMovies,fetchComedyMovies,fetchDocumentariesMovies, fetchDramaMovies,fetchFamilyMovies,  fetchFantasyMovies, fetchHistoryMovies, fetchHorrorMovies, fetchNetflixOriginalsMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchTopRatedMovies, fetchTrendingMovies ] = await Promise.all([
-    fetch(request.fetchAction) , fetch(request.fetchAdventure), fetch(request.fetchAnimation), fetch(request.fetchCrime), fetch(request.fetchComedy), fetch(request.fetchDocumentaries), fetch(request.fetchDrama), fetch(request.fetchFamily), fetch(request.fetchFantasy), fetch(request.fetchHistory), fetch(request.fetchHorror), fetch(request.fetchNetflixOriginals), fetch(request.fetchRomance), fetch(request.fetchScienceFiction), fetch(request.fetchTopRated), fetch(request.fetchTrending) 
+  console.log(request)
+  const [fetchActionMovies , fetchAdventureMovies, fetchAnimationMovies,/* fetchCrimeMovies, fetchComedyMovies,*/fetchDocumentariesMovies, /* fetchDramaMovies,fetchFamilyMovies,   fetchFantasyMovies,*/ fetchHistoryMovies, /* fetchHorrorMovies, */ fetchNetflixOriginalsMovies, /* fetchRomanceMovies,  */fetchScienceFictionMovies, fetchTopRatedMovies, fetchTrendingMovies ] = await Promise.all([
+    fetch(request.fetchAction) , fetch(request.fetchAdventure), fetch(request.fetchAnimation), /* fetch(request.fetchCrime),  fetch(request.fetchComedy),*/ fetch(request.fetchDocumentaries), /* fetch(request.fetchDrama), fetch(request.fetchFamily), fetch(request.fetchFantasy), */ fetch(request.fetchHistory), /* fetch(request.fetchHorror), */ fetch(request.fetchNetflixOriginals)/* , fetch(request.fetchRomance) */, fetch(request.fetchScienceFiction), fetch(request.fetchTopRated), fetch(request.fetchTrending) 
   ]);
   
-  const [ActionMovies , AdventureMovies, AnimationMovies,CrimeMovies,ComedyMovies,Documentaries, DramaMovies,FamilyMovies,  FantasyMovies, HistoryMovies, HorrorMovies, NetflixOriginalsMovies, RomanceMoviesMovies, ScienceFictionMovies, TopRatedMovies, TrendingMovies] = await Promise.all([fetchActionMovies.json() , fetchAdventureMovies.json() || null, fetchAnimationMovies.json() || null,fetchCrimeMovies.json() || null,fetchComedyMovies.json() || null,fetchDocumentariesMovies.json() || null, fetchDramaMovies.json() || null,fetchFamilyMovies.json() || null,  fetchFantasyMovies.json() || null, fetchHistoryMovies.json() || null, fetchHorrorMovies.json() || null, fetchNetflixOriginalsMovies.json() || null, fetchRomanceMovies.json() || null, fetchScienceFictionMovies.json() || null, fetchTopRatedMovies.json() || null, fetchTrendingMovies.json() || null ])
+  const [ActionMovies , AdventureMovies, AnimationMovies,/* CrimeMovies, ComedyMovies,*/Documentaries, /* DramaMovies,FamilyMovies,  FantasyMovies, */ HistoryMovies, /* HorrorMovies, */ NetflixOriginalsMovies, /* RomanceMoviesMovies, */ ScienceFictionMovies, TopRatedMovies, TrendingMovies] = await Promise.all([fetchActionMovies.json() , fetchAdventureMovies.json() || null, fetchAnimationMovies.json() || null/* ,fetchCrimeMovies.json() || null,fetchComedyMovies.json() || null*/, fetchDocumentariesMovies.json() || null, /* fetchDramaMovies.json() || null,fetchFamilyMovies.json() || null,  fetchFantasyMovies.json() || null, */ fetchHistoryMovies.json() || null, /* fetchHorrorMovies.json() || null, */ fetchNetflixOriginalsMovies.json() || null, /* fetchRomanceMovies.json() || null, */ fetchScienceFictionMovies.json() || null, fetchTopRatedMovies.json() || null, fetchTrendingMovies.json() || null ])
 
   wrapper.dispatch(getActionFilm(ActionMovies.results))
   wrapper.dispatch(getAdventureFilm(AdventureMovies.results))
   wrapper.dispatch(getAnimationFilm(AnimationMovies.results))
-  wrapper.dispatch(getCrimeFilm(CrimeMovies.results))
-  wrapper.dispatch(getComedyFilm(ComedyMovies.results))
   wrapper.dispatch(getDocumentariesFilm(Documentaries.results))
-  wrapper.dispatch(getDramaFilm(DramaMovies.results))
-  wrapper.dispatch(getFamilyFilm(FamilyMovies.results))
-  wrapper.dispatch(getFantasyFilm(FantasyMovies.results))
+  /* wrapper.dispatch(getComedyFilm(ComedyMovies.results)) */
+  /* wrapper.dispatch(getHorrorFilm(HorrorMovies.results)) */
+  /*   wrapper.dispatch(getCrimeFilm(CrimeMovies.results)) */
+ /*  wrapper.dispatch(getDramaFilm(DramaMovies.results)) */
+ /*  wrapper.dispatch(getFantasyFilm(FantasyMovies.results)) */
+  /* wrapper.dispatch(getFamilyFilm(FamilyMovies.results)) */
+  /* wrapper.dispatch(getRomanceFilm(RomanceMoviesMovies.results)) */
   wrapper.dispatch(getHistoryFilm(HistoryMovies.results))
-  wrapper.dispatch(getHorrorFilm(HorrorMovies.results))
   wrapper.dispatch(getNetflixOriginalsFilm(NetflixOriginalsMovies.results))
-  wrapper.dispatch(getRomanceFilm(RomanceMoviesMovies.results))
   wrapper.dispatch(getScienceFictionFilm(ScienceFictionMovies.results))
   wrapper.dispatch(getTopRatedFilm(TopRatedMovies.results))
-  wrapper.dispatch(getTrendingFilm(TrendingMovies.results)) 
+  wrapper.dispatch(getTrendingFilm(TrendingMovies.results))
 
   let ctx = req.cookies.user
   let favMovies = req.cookies.favMovies || null

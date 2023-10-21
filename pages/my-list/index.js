@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Films from '../../components/Films';
+import Films from '@/components/Films';
 import {useSelector} from "react-redux"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
